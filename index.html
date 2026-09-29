@@ -72,11 +72,14 @@ button:focus-visible,a:focus-visible{outline:2px solid #fff;outline-offset:3px;b
 
 .ui{position:absolute;inset:0;z-index:20}
 .brand{position:absolute;top:28px;left:38px;color:rgba(255,255,255,.96);font-size:14px;letter-spacing:3.4px;text-transform:uppercase;text-shadow:0 1px 14px rgba(0,0,0,.3)}
-.talkBtn{position:absolute;left:50%;top:57%;transform:translate(-50%,-50%);border:1px solid rgba(255,255,255,.78);background:rgba(15,15,15,.45);color:#fff;padding:13px 24px;border-radius:999px;font-size:12px;letter-spacing:2.2px;text-transform:uppercase;cursor:pointer;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);transition:background .2s}
+.talkBtn{position:absolute;left:50%;top:57%;transform:translate(-50%,-50%);display:flex;align-items:center;gap:10px;border:1px solid rgba(255,255,255,.78);background:rgba(15,15,15,.45);color:#fff;padding:11px 22px 11px 14px;border-radius:999px;font-size:12px;letter-spacing:2.2px;text-transform:uppercase;cursor:pointer;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);transition:background .2s}
 .talkBtn:hover{background:rgba(15,15,15,.72)}
 .openHint{position:absolute;right:14.4%;bottom:24.3%;display:flex;align-items:center;gap:10px;color:#191919;background:rgba(245,246,241,.30);padding:8px 12px;border-radius:10px;font-size:14px;letter-spacing:1.1px;text-transform:uppercase;cursor:pointer;border:0;transition:background .2s}
 .openHint:hover{background:rgba(245,246,241,.62)}
 .keyCap{width:24px;height:24px;border:1px solid #222;display:grid;place-items:center;border-radius:4px;font-size:11px;background:rgba(255,255,255,.5)}
+.talkBtn .keyCap{border-color:rgba(255,255,255,.7);background:rgba(255,255,255,.16);color:#fff}
+.kbd{display:inline-grid;place-items:center;margin-left:9px;padding:0 5px;height:18px;border:1px solid rgba(255,255,255,.4);border-radius:4px;font-size:9px;letter-spacing:1px;color:rgba(255,255,255,.85)}
+.pill:hover .kbd{border-color:rgba(0,0,0,.4);color:var(--night)}
 
 .questionDock{position:absolute;left:24px;bottom:24px;width:var(--dock-w);background:rgba(242,244,240,.86);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border:1px solid rgba(18,18,18,.14);border-radius:26px;padding:18px;box-shadow:0 18px 60px rgba(0,0,0,.14);transform:translateY(calc(100% + 40px));visibility:hidden;transition:transform .35s cubic-bezier(.2,.8,.2,1),visibility 0s linear .35s}
 .questionDock.show{transform:translateY(0);visibility:visible;transition:transform .35s cubic-bezier(.2,.8,.2,1),visibility 0s}
@@ -96,7 +99,7 @@ button:focus-visible,a:focus-visible{outline:2px solid #fff;outline-offset:3px;b
 @media (min-width:901px){
   .experience.dockOpen .subtitle{--sw:min(1030px,68vw,calc(100vw - 492px));width:var(--sw);left:max(50%,calc(468px + var(--sw) / 2))}
 }
-@media (hover:none){.cornerNote,.keyCap{display:none}}
+@media (hover:none){.cornerNote,.keyCap,.kbd{display:none}.talkBtn{padding:13px 24px}}
 
 /* ---------- Book viewer ---------- */
 .book{position:fixed;inset:0;z-index:40;display:flex;flex-direction:column;background:rgba(8,8,8,.95);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);color:var(--text-light);color-scheme:dark;animation:fadeIn .25s ease-out}
@@ -169,14 +172,14 @@ a.pill{text-decoration:none;display:inline-block}
   <div class="overlay"></div><div class="vignette"></div><div class="grain"></div>
   <section class="ui">
     <div class="brand">Alessandro Castellani</div>
-    <button class="talkBtn" id="talkBtn" type="button" aria-controls="questionDock" aria-expanded="false">Talk to me</button>
+    <button class="talkBtn" id="talkBtn" type="button" aria-controls="questionDock" aria-expanded="false"><span class="keyCap" aria-hidden="true">T</span><span>Talk to me</span></button>
     <button class="openHint" id="openPortfolio" type="button"><span class="keyCap" aria-hidden="true">E</span><span>Open the portfolio</span></button>
     <div class="questionDock" id="questionDock" role="region" aria-label="Interactive interview">
       <div class="dockTop"><div class="dockEyebrow">Interactive interview</div><button class="dockClose" id="dockClose" type="button" aria-label="Close questions">×</button></div>
       <div class="questions" id="questions"></div>
     </div>
     <div class="subtitle" id="subtitle" aria-live="polite"><span class="label">Alessandro speaking</span><span class="questionLabel" id="questionLabel"></span><span id="subtitleText"></span></div>
-    <div class="cornerNote">Move the mouse / Press E / Escape to close</div>
+    <div class="cornerNote">Move the mouse / T to talk / E for the portfolio / Esc to close</div>
   </section>
 </main>
 
@@ -185,7 +188,7 @@ a.pill{text-decoration:none;display:inline-block}
     <div class="bookTitle">Alessandro Castellani · Portfolio<span class="where" id="where"></span></div>
     <div class="bookActions">
       <a class="pill" id="downloadPdf" href="assets/portfolio.pdf" download="Alessandro_Castellani_Portfolio.pdf">Download PDF</a>
-      <button class="pill" id="bookClose" type="button">Close<span class="hideNarrow"> portfolio</span></button>
+      <button class="pill" id="bookClose" type="button">Close<span class="hideNarrow"> portfolio</span><span class="kbd" aria-hidden="true">Esc</span></button>
     </div>
     <nav class="bookIndex" id="bookIndex" aria-label="Portfolio index"></nav>
   </header>
@@ -193,7 +196,7 @@ a.pill{text-decoration:none;display:inline-block}
 </section>
 
 <section class="zoom" id="zoom" role="dialog" aria-modal="true" aria-label="Zoomed pages" hidden>
-  <div class="zoomBar"><span id="zoomLabel"></span><button class="pill" id="zoomClose" type="button">Back</button></div>
+  <div class="zoomBar"><span id="zoomLabel"></span><button class="pill" id="zoomClose" type="button">Back<span class="kbd" aria-hidden="true">Esc</span></button></div>
   <div class="zoomScroll" id="zoomScroll"><img id="zoomImg" alt=""></div>
 </section>
 
@@ -372,12 +375,15 @@ document.addEventListener("keydown",e=>{
     closeDock();subtitle.classList.remove("show");stopSpeaking();return;
   }
   if(!zoom.hidden)return;
+  const k=e.key?e.key.toLowerCase():"";
   if(!book.hidden){
     if(e.key==="ArrowRight"){e.preventDefault();scrollToIdx(currentIdx+1)}
     else if(e.key==="ArrowLeft"){e.preventDefault();scrollToIdx(currentIdx-1)}
+    else if(k==="e"&&!e.repeat)closeBook();   /* E again: back to the main scene */
     return;
   }
-  if(e.key&&e.key.toLowerCase()==="e"&&!e.repeat)openBook();
+  if(k==="e"&&!e.repeat)openBook();
+  else if(k==="t"&&!e.repeat){dock.classList.contains("show")?closeDock():openDock()}
 });
 
 /* ---------- Deep links: #portfolio or a section, e.g. #pigro ---------- */
