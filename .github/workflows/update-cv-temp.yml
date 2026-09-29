@@ -1,0 +1,30 @@
+name: Replace CV PDF
+on:
+  push:
+    branches: [main]
+    paths:
+      - "tmp/cv_ready"
+
+permissions:
+  contents: write
+
+jobs:
+  replace-cv:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Rebuild CV PDF
+        shell: bash
+        run: |
+          cat tmp/cv_part_* | tr -d '\n' | base64 -d > assets/cv.pdf
+          echo "0cf95ebbdacc2989c9e50aadbc2c11dd41cb45efbd25c2ea124cbb32de58d97d  assets/cv.pdf" | sha256sum -c -
+          rm -rf tmp
+      - name: Commit CV
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/cv.pdf
+          git add -u tmp
+          git commit -m "Update CV PDF"
+          git push
