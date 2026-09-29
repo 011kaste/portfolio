@@ -6,6 +6,8 @@ Static site, served with GitHub Pages at https://011kaste.github.io/portfolio/
 - `assets/portfolio.pdf`: the full portfolio PDF, offered as a download in the book view.
 - `pages/sm/` and `pages/lg/`: one image per PDF page (p01 cover, p02 to p38 spreads, p40 back; p39 is a blank endpaper and is left out), in two sizes for responsive loading.
 - `assets/*.jpg`: the idle frame and the three speaking frames
+- Contacts: the phone on the table (click it, press `C`, or the C hint). Edit the `contacts` array at the top of the script in `index.html`.
+- `assets/nokia.png` (optional): a transparent photo of the phone. If present it replaces the drawn one on the table automatically.
 - `assets/favicon.svg`: tab icon
 
 Deep links: `#portfolio` opens the book, `#pigro`, `#nikon`, `#chiaromonte` and the other section slugs in `index.html` open it at that section.
