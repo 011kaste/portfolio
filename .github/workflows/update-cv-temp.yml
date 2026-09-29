@@ -17,7 +17,7 @@ jobs:
         shell: bash
         run: |
           cat tmp/cv_part_* | tr -d '\n' | base64 -d > assets/cv.pdf
-          echo "930d9c7f3041fe62d4703f5f4ef8f12ae4033930bcaa2f99337457dbb936591d  assets/cv.pdf" | sha256sum -c -
+          echo "0cf95ebbdacc2989c9e50aadbc2c11dd41cb45efbd25c2ea124cbb32de58d97d  assets/cv.pdf" | sha256sum -c -
           rm -rf tmp
       - name: Commit CV
         shell: bash
