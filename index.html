@@ -3,20 +3,20 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Alessandro Castellani · Interactive Portfolio</title>
-<meta name="description" content="Alessandro Castellani, communication designer and strategist. An interactive portfolio: ask a question, then open the full PDF.">
+<title>Alessandro Castellani Portfolio</title>
+<meta name="description" content="Alessandro Castellani, communication designer and strategist. An interactive portfolio: ask a question, then browse the full portfolio.">
 <meta name="theme-color" content="#d9ddd9">
 
 <meta property="og:type" content="website">
-<meta property="og:title" content="Alessandro Castellani · Interactive Portfolio">
-<meta property="og:description" content="Communication designer and strategist. Ask a question, then open the full portfolio.">
+<meta property="og:title" content="Alessandro Castellani Portfolio">
+<meta property="og:description" content="Communication designer and strategist. Ask a question, then browse the full portfolio.">
 <meta property="og:image" content="https://011kaste.github.io/portfolio/assets/idle.jpg">
 <meta property="og:image:width" content="1600">
 <meta property="og:image:height" content="900">
 <meta property="og:url" content="https://011kaste.github.io/portfolio/">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Alessandro Castellani · Interactive Portfolio">
-<meta name="twitter:description" content="Communication designer and strategist. Ask a question, then open the full portfolio.">
+<meta name="twitter:title" content="Alessandro Castellani Portfolio">
+<meta name="twitter:description" content="Communication designer and strategist. Ask a question, then browse the full portfolio.">
 <meta name="twitter:image" content="https://011kaste.github.io/portfolio/assets/idle.jpg">
 
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
@@ -26,15 +26,42 @@
 <link rel="preload" as="image" href="assets/speak4.jpg">
 
 <style>
+/* Base rules the page relies on */
+:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}
+img{max-width:100%}
+[hidden]:not([hidden=until-found i]){display:none!important}
+</style>
+</head>
+<body>
+<style>
+:root{
+  --room:#d9ddd9;
+  --ink:#111;
+  --paper:#f2f4f0;
+  --night:#080808;
+  --night-2:#141414;
+  --muted-dark:#4e534f;
+  --line-light:rgba(255,255,255,.24);
+  --text-light:rgba(255,255,255,.92);
+  --text-light-2:rgba(255,255,255,.62);
+  --font:"Helvetica Neue",Helvetica,Arial,sans-serif;
+  --dock-w:min(420px,92vw);
+}
 *{box-sizing:border-box}
-html,body{margin:0;height:100%;overflow:hidden;background:#d9ddd9;font-family:Inter,Arial,Helvetica,sans-serif}
-button{font:inherit}
-.experience{position:relative;width:100vw;height:100vh;height:100dvh;overflow:hidden;background:#d9ddd9;color:#111}
-#sceneWrap{position:absolute;inset:0;overflow:hidden;background:#d9ddd9}
-.sceneLayer{position:absolute;inset:-1.5%;background-position:center;background-size:cover;background-repeat:no-repeat;opacity:0;transition:opacity .13s linear,transform .18s ease-out;will-change:opacity,transform}
+html,body{height:100%;overflow:hidden}
+body{margin:0;background:var(--room);color:var(--ink);font-family:var(--font);-webkit-font-smoothing:antialiased}
+button{font:inherit;color:inherit}
+button:focus-visible,a:focus-visible{outline:2px solid #fff;outline-offset:3px;box-shadow:0 0 0 5px rgba(0,0,0,.45)}
+
+/* ---------- Scene ---------- */
+.experience{position:relative;width:100%;height:100%;overflow:hidden;background:var(--room);color:var(--ink)}
+#sceneWrap{position:absolute;inset:0;overflow:hidden;background:var(--room)}
+.sceneLayer{position:absolute;inset:-1.5%;background-position:center;background-size:cover;background-repeat:no-repeat;opacity:0;transition:opacity .13s linear,transform .18s ease-out;will-change:opacity,transform;transform:scale(1.018)}
 .sceneLayer.visible{opacity:1}
-#sceneIdle{background-image:url("assets/idle.jpg");opacity:1}
-#scene1{background-image:url("assets/idle.jpg")}
+#sceneIdle,#scene1{background-image:url("assets/idle.jpg")}
+#sceneIdle{opacity:1}
 #scene2{background-image:url("assets/speak2.jpg")}
 #scene3{background-image:url("assets/speak3.jpg")}
 #scene4{background-image:url("assets/speak4.jpg")}
@@ -42,53 +69,100 @@ button{font:inherit}
 .overlay{background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(0,0,0,.055));z-index:10}
 .vignette{background:radial-gradient(circle at 50% 45%,transparent 42%,rgba(0,0,0,.13) 100%);z-index:11}
 .grain{z-index:12;opacity:.06;background-image:radial-gradient(circle,rgba(0,0,0,.17) 1px,transparent 1px);background-size:10px 10px;mix-blend-mode:multiply}
+
 .ui{position:absolute;inset:0;z-index:20}
-.brand{position:absolute;top:28px;left:38px;color:rgba(255,255,255,.96);font-size:14px;letter-spacing:3.4px;text-transform:uppercase}
-.topBtn{position:absolute;top:18px;right:28px;border:1px solid rgba(30,30,30,.45);background:rgba(242,244,240,.14);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-radius:999px;color:#111;padding:14px 24px;font-size:12px;letter-spacing:2px;text-transform:uppercase;cursor:pointer}
-.talkBtn{position:absolute;left:50%;top:57%;transform:translate(-50%,-50%);border:1px solid rgba(255,255,255,.78);background:rgba(15,15,15,.45);color:#fff;padding:13px 24px;border-radius:999px;font-size:12px;letter-spacing:2.2px;text-transform:uppercase;cursor:pointer;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
-.openHint{position:absolute;right:14.4%;bottom:24.3%;display:flex;align-items:center;gap:10px;color:#191919;background:rgba(245,246,241,.30);padding:8px 12px;border-radius:10px;font-size:14px;letter-spacing:1.1px;text-transform:uppercase;cursor:pointer;border:0}
+.brand{position:absolute;top:28px;left:38px;color:rgba(255,255,255,.96);font-size:14px;letter-spacing:3.4px;text-transform:uppercase;text-shadow:0 1px 14px rgba(0,0,0,.3)}
+.topBtn{position:absolute;top:18px;right:28px;border:1px solid rgba(30,30,30,.45);background:rgba(242,244,240,.14);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border-radius:999px;color:var(--ink);padding:14px 24px;font-size:12px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:background .2s,color .2s}
+.topBtn:hover{background:var(--ink);color:#fff}
+.talkBtn{position:absolute;left:50%;top:57%;transform:translate(-50%,-50%);border:1px solid rgba(255,255,255,.78);background:rgba(15,15,15,.45);color:#fff;padding:13px 24px;border-radius:999px;font-size:12px;letter-spacing:2.2px;text-transform:uppercase;cursor:pointer;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);transition:background .2s}
+.talkBtn:hover{background:rgba(15,15,15,.72)}
+.openHint{position:absolute;right:14.4%;bottom:24.3%;display:flex;align-items:center;gap:10px;color:#191919;background:rgba(245,246,241,.30);padding:8px 12px;border-radius:10px;font-size:14px;letter-spacing:1.1px;text-transform:uppercase;cursor:pointer;border:0;transition:background .2s}
+.openHint:hover{background:rgba(245,246,241,.62)}
 .keyCap{width:24px;height:24px;border:1px solid #222;display:grid;place-items:center;border-radius:4px;font-size:11px;background:rgba(255,255,255,.5)}
-.questionDock{position:absolute;left:24px;bottom:24px;width:min(420px,92vw);background:rgba(242,244,240,.86);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(18,18,18,.14);border-radius:26px;padding:18px;box-shadow:0 18px 60px rgba(0,0,0,.14);transform:translateY(120%);transition:transform .35s cubic-bezier(.2,.8,.2,1)}
-.questionDock.show{transform:translateY(0)}
+
+.questionDock{position:absolute;left:24px;bottom:24px;width:var(--dock-w);background:rgba(242,244,240,.86);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border:1px solid rgba(18,18,18,.14);border-radius:26px;padding:18px;box-shadow:0 18px 60px rgba(0,0,0,.14);transform:translateY(calc(100% + 40px));visibility:hidden;transition:transform .35s cubic-bezier(.2,.8,.2,1),visibility 0s linear .35s}
+.questionDock.show{transform:translateY(0);visibility:visible;transition:transform .35s cubic-bezier(.2,.8,.2,1),visibility 0s}
 .dockTop{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
-.dockEyebrow{font-size:11px;letter-spacing:2.2px;text-transform:uppercase;color:#4e534f}
-.dockClose{border:0;background:transparent;font-size:24px;cursor:pointer}
+.dockEyebrow{font-size:11px;letter-spacing:2.2px;text-transform:uppercase;color:var(--muted-dark)}
+.dockClose{border:0;background:transparent;font-size:24px;line-height:1;cursor:pointer;padding:2px 6px;border-radius:8px}
 .questions{display:grid;gap:9px}
-.question{border:1px solid rgba(18,18,18,.11);background:rgba(255,255,255,.46);border-radius:16px;padding:14px;cursor:pointer;text-align:left;font-size:14px;line-height:1.3;color:#161616}
-.question:hover{background:#141414;color:white}
-.subtitle{position:absolute;left:50%;bottom:24px;transform:translateX(-50%);width:min(1030px,68vw);background:rgba(10,10,10,.72);color:white;padding:16px 18px;border-radius:18px;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);line-height:1.45;font-size:15px;opacity:0;transition:opacity .2s;box-shadow:0 12px 50px rgba(0,0,0,.22);pointer-events:none}
+.question{border:1px solid rgba(18,18,18,.11);background:rgba(255,255,255,.46);border-radius:16px;padding:14px;cursor:pointer;text-align:left;font-size:14px;line-height:1.3;color:#161616;transition:background .15s,color .15s}
+.question:hover,.question[aria-pressed="true"]{background:var(--night-2);color:#fff}
+
+.subtitle{position:absolute;left:50%;bottom:24px;transform:translateX(-50%);width:min(1030px,68vw);background:rgba(10,10,10,.72);color:#fff;padding:16px 18px;border-radius:18px;-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);line-height:1.45;font-size:15px;opacity:0;transition:opacity .2s;box-shadow:0 12px 50px rgba(0,0,0,.22);pointer-events:none}
 .subtitle.show{opacity:1}
 .subtitle .label{display:block;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.66);margin-bottom:7px}
 .subtitle .questionLabel{display:block;color:rgba(255,255,255,.82);font-size:12px;margin-bottom:8px}
-.cornerNote{position:absolute;right:28px;bottom:18px;font-size:10px;letter-spacing:1.8px;text-transform:uppercase;color:rgba(255,255,255,.72)}
-.pdfModal{position:fixed;inset:0;z-index:40;display:none;background:rgba(8,8,8,.92);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
-.pdfModal.show{display:block}
-.pdfTop{position:absolute;left:24px;right:24px;top:18px;display:flex;align-items:center;justify-content:space-between;gap:12px;color:white}
-.pdfTitle{font-size:12px;letter-spacing:2px;text-transform:uppercase}
-.pdfActions{display:flex;gap:8px}
-.pdfClose,.pdfOpen{border:1px solid rgba(255,255,255,.24);background:rgba(255,255,255,.06);color:white;border-radius:999px;padding:10px 14px;cursor:pointer;text-transform:uppercase;letter-spacing:1.8px;font-size:11px;text-decoration:none;font-family:inherit}
-.pdfFrame{position:absolute;inset:72px 24px 24px;background:#111;border-radius:14px;overflow:hidden}
-.pdfFrame iframe{width:100%;height:100%;border:0;background:white}
-@media(max-width:900px){
-  .brand{font-size:11px;left:18px;top:20px}
-  .topBtn{right:16px;top:14px;padding:12px 16px;font-size:10px}
-  .talkBtn{top:auto;bottom:30vh}
-  .openHint{right:16px;bottom:24vh;font-size:12px}
-  .subtitle{width:calc(100vw - 24px);left:12px;right:12px;transform:none;bottom:14px;font-size:14px}
-  .questionDock{left:14px;right:14px;width:auto;bottom:14px}
-  .cornerNote{display:none}
-  .pdfTitle{display:none}
-  .pdfFrame{inset:64px 10px 10px}
+.cornerNote{position:absolute;right:28px;bottom:18px;font-size:10px;letter-spacing:1.8px;text-transform:uppercase;color:rgba(255,255,255,.72);transition:opacity .2s}
+.subtitle.show ~ .cornerNote{opacity:0}
+@media (min-width:901px){
+  .experience.dockOpen .subtitle{--sw:min(1030px,68vw,calc(100vw - 492px));width:var(--sw);left:max(50%,calc(468px + var(--sw) / 2))}
 }
-@media(max-width:600px){
-  .brand{font-size:10px;letter-spacing:2px;top:24px;left:16px;max-width:48vw;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .topBtn{padding:11px 13px;font-size:9px;letter-spacing:1.5px}
+@media (hover:none){.cornerNote,.keyCap{display:none}}
+
+/* ---------- Book viewer ---------- */
+.book{position:fixed;inset:0;z-index:40;display:flex;flex-direction:column;background:rgba(8,8,8,.95);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);color:var(--text-light);color-scheme:dark;animation:fadeIn .25s ease-out}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.bookBar{flex:none;display:grid;grid-template-columns:1fr auto;align-items:center;gap:12px 20px;padding:calc(14px + env(safe-area-inset-top,0px)) 24px 12px;border-bottom:1px solid rgba(255,255,255,.08)}
+.bookTitle{font-size:12px;letter-spacing:2px;text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bookTitle .where{color:var(--text-light-2);margin-left:14px;letter-spacing:1.6px}
+.bookActions{display:flex;align-items:center;gap:10px}
+.pill{border:1px solid var(--line-light);background:rgba(255,255,255,.06);color:#fff;border-radius:999px;padding:10px 14px;cursor:pointer;text-transform:uppercase;letter-spacing:1.8px;font-size:11px;white-space:nowrap;transition:background .15s,color .15s}
+.pill:hover{background:#fff;color:var(--night)}
+a.pill{text-decoration:none;display:inline-block}
+.pill[disabled]{opacity:.5;cursor:default;background:rgba(255,255,255,.06);color:#fff}
+.bookIndex{grid-column:1 / -1;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;margin:0 -6px;padding:2px 0}
+.bookIndex::-webkit-scrollbar{display:none}
+.bookIndex button{flex:none;border:0;background:transparent;color:var(--text-light-2);font-size:11px;letter-spacing:1.6px;text-transform:uppercase;padding:6px;cursor:pointer;border-radius:6px;white-space:nowrap}
+.bookIndex button:hover{color:#fff}
+.bookIndex button[aria-current="true"]{color:#fff;text-decoration:underline;text-underline-offset:5px}
+
+.bookScroll{position:relative;flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;padding-block:28px 40px;padding-inline:24px;display:flex;flex-direction:column;align-items:center;gap:28px;outline:none;scroll-behavior:smooth}
+.spread{margin:0;width:min(100%,1500px);scroll-margin-top:24px}
+.spread.single{width:min(100%,750px)}
+.spreadBtn{display:block;width:100%;padding:0;border:0;background:#efefec;cursor:zoom-in;border-radius:2px;box-shadow:0 18px 60px rgba(0,0,0,.45)}
+.spreadBtn img{display:block;width:100%;height:auto;max-width:100%}
+
+.contact{width:min(100%,1500px);display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:24px;padding:28px 0 8px;border-top:1px solid rgba(255,255,255,.12);margin-top:8px}
+.contact h2{margin:0 0 6px;font-size:22px;letter-spacing:.5px;text-transform:uppercase;font-weight:700;color:#fff;text-wrap:balance}
+.contact p{margin:0;color:var(--text-light-2);font-size:13px;line-height:1.5}
+.contact .k{display:block;font-size:10px;letter-spacing:1.8px;text-transform:uppercase;color:rgba(255,255,255,.44);margin-bottom:6px}
+.contact .v{font-size:15px;color:#fff;user-select:all;word-break:break-all}
+.contact a.v{text-decoration:none;border-bottom:1px solid rgba(255,255,255,.3)}
+.contact a.v:hover{border-color:#fff}
+.row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.copyBtn{padding:6px 10px;font-size:10px}
+
+/* ---------- Zoom ---------- */
+.zoom{position:fixed;inset:0;z-index:60;background:#050505;display:flex;flex-direction:column;color-scheme:dark}
+.zoomBar{flex:none;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:calc(12px + env(safe-area-inset-top,0px)) 24px 12px;color:var(--text-light-2);font-size:11px;letter-spacing:1.8px;text-transform:uppercase}
+.zoomScroll{flex:1;min-height:0;overflow:auto;overscroll-behavior:contain;cursor:grab;touch-action:pan-x pan-y pinch-zoom}
+.zoomScroll.dragging{cursor:grabbing}
+.zoomScroll img{display:block;height:100%;width:auto;max-width:none;user-select:none;-webkit-user-drag:none;margin:0 auto}
+
+@media (max-width:900px){
+  .brand{font-size:11px;left:18px;top:calc(20px + env(safe-area-inset-top,0px));max-width:calc(100% - 200px);line-height:1.5}
+  .topBtn{right:16px;top:calc(14px + env(safe-area-inset-top,0px));padding:12px 16px;font-size:10px}
+  .talkBtn{top:auto;bottom:30vh}
+  .openHint{right:16px;bottom:24vh;font-size:12px;background:rgba(245,246,241,.72)}
+  .subtitle{width:auto;left:12px;right:12px;transform:none;bottom:calc(14px + env(safe-area-inset-bottom,0px));font-size:14px}
+  .questionDock{left:14px;right:14px;width:auto;bottom:calc(14px + env(safe-area-inset-bottom,0px))}
+  .cornerNote{display:none}
+  .bookBar{padding-inline:16px}
+  .bookTitle .where{display:none}
+  .bookScroll{padding-inline:16px;gap:18px;padding-block:18px 32px}
+  .zoomBar{padding-inline:16px}
+  .hideNarrow{display:none}
+}
+@media (max-width:420px){.brand{letter-spacing:2.4px}.topBtn{letter-spacing:1.4px;padding:11px 13px}}
+@media (prefers-reduced-motion:reduce){
+  .sceneLayer,.questionDock,.subtitle,.book{transition:none;animation:none}
+  .bookScroll{scroll-behavior:auto}
 }
 </style>
-</head>
-<body>
+
 <main class="experience" id="experience">
-  <div id="sceneWrap">
+  <div id="sceneWrap" role="img" aria-label="Alessandro Castellani sitting at a table in a white concrete room, his portfolio lying in front of him">
     <div class="sceneLayer visible" id="sceneIdle"></div>
     <div class="sceneLayer" id="scene1"></div>
     <div class="sceneLayer" id="scene2"></div>
@@ -97,59 +171,229 @@ button{font:inherit}
   </div>
   <div class="overlay"></div><div class="vignette"></div><div class="grain"></div>
   <section class="ui">
-    <div class="brand">ALESSANDRO CASTELLANI</div>
-    <button class="topBtn" id="openProjects">VAI AI PROGETTI →</button>
-    <button class="talkBtn" id="talkBtn">TALK TO ME</button>
-    <button class="openHint" id="openPortfolio"><span class="keyCap">E</span><span>APRI IL PORTFOLIO</span></button>
-    <div class="questionDock" id="questionDock">
-      <div class="dockTop"><div class="dockEyebrow">Interactive interview</div><button class="dockClose" id="dockClose" aria-label="Close">×</button></div>
+    <div class="brand">Alessandro Castellani</div>
+    <button class="topBtn" id="openProjects" type="button">Go to projects →</button>
+    <button class="talkBtn" id="talkBtn" type="button" aria-controls="questionDock" aria-expanded="false">Talk to me</button>
+    <button class="openHint" id="openPortfolio" type="button"><span class="keyCap" aria-hidden="true">E</span><span>Open the portfolio</span></button>
+    <div class="questionDock" id="questionDock" role="region" aria-label="Interactive interview">
+      <div class="dockTop"><div class="dockEyebrow">Interactive interview</div><button class="dockClose" id="dockClose" type="button" aria-label="Close questions">×</button></div>
       <div class="questions" id="questions"></div>
     </div>
-    <div class="subtitle" id="subtitle"><span class="label">Alessandro speaking</span><span class="questionLabel" id="questionLabel"></span><span id="subtitleText"></span></div>
-    <div class="cornerNote">MOVE THE MOUSE / PRESS E / ESCAPE TO CLOSE</div>
+    <div class="subtitle" id="subtitle" aria-live="polite"><span class="label">Alessandro speaking</span><span class="questionLabel" id="questionLabel"></span><span id="subtitleText"></span></div>
+    <div class="cornerNote">Move the mouse / Press E / Escape to close</div>
   </section>
 </main>
 
-<section class="pdfModal" id="pdfModal">
-  <div class="pdfTop">
-    <div class="pdfTitle">Alessandro Castellani · Portfolio PDF</div>
-    <div class="pdfActions">
-      <a class="pdfOpen" href="assets/portfolio.pdf" target="_blank" rel="noopener">Open in new tab</a>
-      <button class="pdfClose" id="pdfClose">Close PDF</button>
+<section class="book" id="book" role="dialog" aria-modal="true" aria-label="Alessandro Castellani portfolio" hidden>
+  <header class="bookBar">
+    <div class="bookTitle">Alessandro Castellani · Portfolio<span class="where" id="where"></span></div>
+    <div class="bookActions">
+      <a class="pill" id="downloadPdf" href="assets/portfolio.pdf" download="Alessandro_Castellani_Portfolio.pdf">Download PDF</a>
+      <button class="pill" id="bookClose" type="button">Close<span class="hideNarrow"> portfolio</span></button>
     </div>
-  </div>
-  <div class="pdfFrame"><iframe id="pdfFrame" title="Portfolio PDF"></iframe></div>
+    <nav class="bookIndex" id="bookIndex" aria-label="Portfolio index"></nav>
+  </header>
+  <div class="bookScroll" id="bookScroll" tabindex="-1"></div>
+</section>
+
+<section class="zoom" id="zoom" role="dialog" aria-modal="true" aria-label="Zoomed pages" hidden>
+  <div class="zoomBar"><span id="zoomLabel"></span><button class="pill" id="zoomClose" type="button">Back</button></div>
+  <div class="zoomScroll" id="zoomScroll"><img id="zoomImg" alt=""></div>
 </section>
 
 <script>
-const PDF_URL='assets/portfolio.pdf';
-const interview=[{"q": "Tell me about yourself.", "a": "I\u2019m Alessandro Castellani, a communication designer and strategist. My work sits between research, storytelling, branding and visual culture, with a strong interest in contemporary art and editorial thinking."}, {"q": "What kind of projects do you work on?", "a": "I work on projects that mix concept, strategy and communication design. In the portfolio you\u2019ll find branding, cultural positioning, integrated campaigns, archival thinking and editorial or curatorial work."}, {"q": "How do you approach strategy?", "a": "I usually begin with observation and context. I look for tensions, habits and contradictions, then build an insight and a clear positioning before translating it into narrative, form and communication."}, {"q": "Show me something you\u2019re proud of.", "a": "One project I\u2019m proud of is Nikon Base-Archive, where I reframed Nikon around authenticity and visual evidence, turning photography into something to preserve, certify and experience as proof of reality."}, {"q": "Why the United States?", "a": "Because I want to place my work in a context where strategy, design, storytelling and experience can really intersect. I want the portfolio itself to act as a case study of how I think, not just a container of finished work."}];
-const exp=document.getElementById('experience'),dock=document.getElementById('questionDock'),qEl=document.getElementById('questions'),subtitle=document.getElementById('subtitle'),subtitleText=document.getElementById('subtitleText'),questionLabel=document.getElementById('questionLabel'),pdfModal=document.getElementById('pdfModal'),pdfFrame=document.getElementById('pdfFrame');
-const layers=[...document.querySelectorAll('.sceneLayer')],idle=document.getElementById('sceneIdle'),frames=[scene1,scene2,scene3,scene4];
-let typing=null,speakInt=null,speakStop=null,fi=0,pdfLoaded=false;
-function showOnly(el){layers.forEach(l=>l.classList.remove('visible'));el.classList.add('visible')}
-function stopSpeaking(){clearInterval(speakInt);clearTimeout(speakStop);showOnly(idle)}
-function startSpeaking(ms){stopSpeaking();fi=0;speakInt=setInterval(()=>{showOnly(frames[fi%frames.length]);fi++},185);speakStop=setTimeout(stopSpeaking,ms)}
-function typeText(t){clearInterval(typing);subtitleText.textContent='';let i=0;typing=setInterval(()=>{subtitleText.textContent=t.slice(0,i++);if(i>t.length)clearInterval(typing)},16)}
-function play(item){questionLabel.textContent=item.q;subtitle.classList.add('show');typeText(item.a);startSpeaking(Math.min(Math.max(item.a.length*52,3500),12000))}
-interview.forEach(item=>{const b=document.createElement('button');b.className='question';b.textContent=item.q;b.onclick=()=>play(item);qEl.appendChild(b)});
-// iOS Safari and most mobile browsers render PDFs poorly inside an iframe, so open the file directly there.
-const mobilePdf=/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)||(navigator.maxTouchPoints>1&&/Macintosh/.test(navigator.userAgent));
-function openPdf(){
-  if(mobilePdf){window.open(PDF_URL,'_blank','noopener');return}
-  if(!pdfLoaded){pdfFrame.src=PDF_URL;pdfLoaded=true}
-  pdfModal.classList.add('show')
+const interview=[
+  {q:"Tell me about yourself.",a:"I’m Alessandro Castellani, a communication designer and strategist. My work sits between research, storytelling, branding and visual culture, with a strong interest in contemporary art and editorial thinking."},
+  {q:"What kind of projects do you work on?",a:"I work on projects that mix concept, strategy and communication design. In the portfolio you’ll find branding, cultural positioning, integrated campaigns, archival thinking and editorial or curatorial work."},
+  {q:"How do you approach strategy?",a:"I usually begin with observation and context. I look for tensions, habits and contradictions, then build an insight and a clear positioning before translating it into narrative, form and communication."},
+  {q:"Show me something you’re proud of.",a:"One project I’m proud of is Nikon Base-Archive, where I reframed Nikon around authenticity and visual evidence, turning photography into something to preserve, certify and experience as proof of reality."},
+  {q:"Why the United States?",a:"Because I want to place my work in a context where strategy, design, storytelling and experience can really intersect. I want the portfolio itself to act as a case study of how I think, not just a container of finished work."}
+];
+
+/* Book structure: PDF page -> section. Page 39 is a blank endpaper and is left out. */
+const SECTIONS=[
+  {from:1,to:1,name:"Cover"},
+  {from:2,to:2,name:"Index"},
+  {from:3,to:3,name:"About Me",slug:"about"},
+  {from:4,to:4,name:"Research / Strategy",slug:"research"},
+  {from:5,to:7,name:"La Gazza Ladra",slug:"la-gazza-ladra"},
+  {from:8,to:12,name:"Pigro",slug:"pigro"},
+  {from:13,to:17,name:"Nikon Base-Archive",slug:"nikon"},
+  {from:18,to:22,name:"DJ Skills & Pills",slug:"dj-skills-pills"},
+  {from:23,to:25,name:"V-Archive",slug:"v-archive"},
+  {from:26,to:26,name:"Art Curating / Editorial",slug:"art-curating"},
+  {from:27,to:31,name:"Chiaromonte",slug:"chiaromonte"},
+  {from:32,to:34,name:"Tuina",slug:"tuina"},
+  {from:35,to:37,name:"Cessi",slug:"cessi"},
+  {from:38,to:38,name:"Contacts",slug:"contacts"},
+  {from:40,to:40,name:"End of package"}
+];
+const PAGES=[];
+for(let n=1;n<=40;n++){
+  if(n===39)continue;
+  const single=(n===1||n===40);
+  const sec=SECTIONS.find(s=>n>=s.from&&n<=s.to);
+  const pp=single?(n===1?"Cover":"Back"):`pp. ${2*n-2}–${2*n-1}`;
+  PAGES.push({n,single,sec,pp,id:"p"+String(n).padStart(2,"0")});
 }
-function closePdf(){pdfModal.classList.remove('show')}
-document.getElementById('talkBtn').onclick=()=>dock.classList.add('show');
-document.getElementById('dockClose').onclick=()=>dock.classList.remove('show');
-document.getElementById('openProjects').onclick=openPdf;
-document.getElementById('openPortfolio').onclick=openPdf;
-document.getElementById('pdfClose').onclick=closePdf;
-document.addEventListener('keydown',e=>{if(e.key.toLowerCase()==='e')openPdf();if(e.key==='Escape'){closePdf();dock.classList.remove('show');subtitle.classList.remove('show');stopSpeaking()}});
-exp.addEventListener('mousemove',e=>{const r=exp.getBoundingClientRect(),x=(e.clientX-r.width/2)/r.width,y=(e.clientY-r.height/2)/r.height;layers.forEach(l=>l.style.transform=`translate3d(${(x*-14).toFixed(1)}px,${(y*-9).toFixed(1)}px,0) scale(1.018)`)});
-exp.addEventListener('mouseleave',()=>layers.forEach(l=>l.style.transform='scale(1.018)'));
-layers.forEach(l=>l.style.transform='scale(1.018)');
+
+const $=id=>document.getElementById(id);
+const exp=$("experience"),dock=$("questionDock"),qEl=$("questions"),subtitle=$("subtitle"),subtitleText=$("subtitleText"),questionLabel=$("questionLabel"),talkBtn=$("talkBtn");
+const book=$("book"),bookScroll=$("bookScroll"),bookIndex=$("bookIndex"),where=$("where"),zoom=$("zoom"),zoomScroll=$("zoomScroll"),zoomImg=$("zoomImg"),zoomLabel=$("zoomLabel");
+const reduceMotion=window.matchMedia("(prefers-reduced-motion: reduce)");
+const narrow=window.matchMedia("(max-width: 900px)");
+
+/* ---------- Talking scene ---------- */
+const layers=[...document.querySelectorAll(".sceneLayer")],idle=$("sceneIdle"),frames=[$("scene1"),$("scene2"),$("scene3"),$("scene4")];
+let typing=null,speakInt=null,speakStop=null,fi=0;
+function showOnly(el){layers.forEach(l=>l.classList.remove("visible"));el.classList.add("visible")}
+function stopSpeaking(){clearInterval(speakInt);clearTimeout(speakStop);showOnly(idle)}
+function startSpeaking(ms){stopSpeaking();if(reduceMotion.matches)return;fi=0;speakInt=setInterval(()=>{showOnly(frames[fi%frames.length]);fi++},185);speakStop=setTimeout(stopSpeaking,ms)}
+function typeText(t){clearInterval(typing);if(reduceMotion.matches){subtitleText.textContent=t;return}subtitleText.textContent="";let i=0;typing=setInterval(()=>{subtitleText.textContent=t.slice(0,i++);if(i>t.length)clearInterval(typing)},16)}
+function openDock(){dock.classList.add("show");exp.classList.add("dockOpen");talkBtn.setAttribute("aria-expanded","true");if(narrow.matches){subtitle.classList.remove("show");stopSpeaking()}}
+function closeDock(){dock.classList.remove("show");exp.classList.remove("dockOpen");talkBtn.setAttribute("aria-expanded","false")}
+function play(item,btn){
+  qEl.querySelectorAll(".question").forEach(b=>b.setAttribute("aria-pressed",String(b===btn)));
+  if(narrow.matches)closeDock();
+  questionLabel.textContent=item.q;subtitle.classList.add("show");typeText(item.a);
+  startSpeaking(Math.min(Math.max(item.a.length*52,3500),12000));
+}
+interview.forEach(item=>{const b=document.createElement("button");b.type="button";b.className="question";b.textContent=item.q;b.setAttribute("aria-pressed","false");b.onclick=()=>play(item,b);qEl.appendChild(b)});
+talkBtn.onclick=()=>dock.classList.contains("show")?closeDock():openDock();
+$("dockClose").onclick=closeDock;
+
+exp.addEventListener("mousemove",e=>{if(reduceMotion.matches)return;const r=exp.getBoundingClientRect(),x=(e.clientX-r.width/2)/r.width,y=(e.clientY-r.height/2)/r.height;layers.forEach(l=>l.style.transform=`translate3d(${(x*-14).toFixed(1)}px,${(y*-9).toFixed(1)}px,0) scale(1.018)`)});
+exp.addEventListener("mouseleave",()=>layers.forEach(l=>l.style.transform="scale(1.018)"));
+
+/* ---------- Book ---------- */
+let built=false,lastTrigger=null,currentIdx=0;
+function buildBook(){
+  if(built)return;built=true;
+  SECTIONS.filter(s=>s.slug).forEach(s=>{
+    const b=document.createElement("button");b.type="button";b.textContent=s.name;b.dataset.slug=s.slug;
+    b.onclick=()=>goTo(s.slug);bookIndex.appendChild(b);
+  });
+  const frag=document.createDocumentFragment();
+  PAGES.forEach((p,i)=>{
+    const fig=document.createElement("figure");fig.className="spread"+(p.single?" single":"");fig.id=p.id;fig.dataset.idx=i;
+    const w=p.single?1404:2807,h=993;
+    const btn=document.createElement("button");btn.type="button";btn.className="spreadBtn";
+    const label=`${p.sec.name}, ${p.pp}`;
+    btn.setAttribute("aria-label",`Zoom in on ${label}`);
+    const img=document.createElement("img");
+    img.width=w;img.height=h;img.decoding="async";
+    img.loading=i<2?"eager":"lazy";
+    img.alt=`Portfolio ${label}`;
+    img.sizes=p.single?"(max-width: 798px) calc(100vw - 32px), 750px":"(max-width: 1548px) calc(100vw - 48px), 1500px";
+    img.srcset=`pages/sm/${p.id}.webp ${Math.round(w/2)}w, pages/lg/${p.id}.webp ${w}w`;
+    img.src=`pages/sm/${p.id}.webp`;
+    btn.appendChild(img);
+    btn.addEventListener("click",e=>openZoom(p,e,img));
+    fig.appendChild(btn);frag.appendChild(fig);
+  });
+  bookScroll.appendChild(frag);
+  bookScroll.appendChild(buildContact());
+  const io=new IntersectionObserver(entries=>{
+    entries.forEach(en=>{if(en.isIntersecting)setCurrent(+en.target.dataset.idx)});
+  },{root:bookScroll,rootMargin:"-45% 0px -45% 0px"});
+  bookScroll.querySelectorAll(".spread").forEach(f=>io.observe(f));
+  setCurrent(0);
+}
+function buildContact(){
+  const box=document.createElement("section");box.className="contact";box.setAttribute("aria-label","Contacts");
+  box.innerHTML=`
+    <div><h2>Castellani Alessandro</h2><p>Communication Design<br>Strategist</p></div>
+    <div><span class="k">Email</span><div class="row"><span class="v" id="mail">a.castellani2002@gmail.com</span><button class="pill copyBtn" type="button" id="copyMail">Copy</button></div><p style="margin-top:6px">Selected works available upon request</p></div>
+    <div><span class="k">Instagram</span><a class="v" href="https://www.instagram.com/011kaste/" target="_blank" rel="noopener">@011kaste</a></div>`;
+  box.querySelector("#copyMail").addEventListener("click",e=>{
+    const b=e.currentTarget,t=box.querySelector("#mail").textContent;
+    const done=()=>{b.textContent="Copied";setTimeout(()=>b.textContent="Copy",1600)};
+    const fallback=()=>{const r=document.createRange();r.selectNodeContents(box.querySelector("#mail"));const s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent="Selected";setTimeout(()=>b.textContent="Copy",1600)};
+    try{navigator.clipboard.writeText(t).then(done,fallback)}catch(err){fallback()}
+  });
+  return box;
+}
+function setCurrent(i){
+  currentIdx=i;const p=PAGES[i];
+  where.textContent=`${p.sec.name} · ${p.pp}`;
+  const slug=p.sec.slug;
+  bookIndex.querySelectorAll("button").forEach(b=>{
+    const on=b.dataset.slug===slug;b.setAttribute("aria-current",String(on));
+    if(on&&book.hidden===false){const bl=b.offsetLeft,br=bl+b.offsetWidth,vl=bookIndex.scrollLeft,vr=vl+bookIndex.clientWidth;if(bl<vl||br>vr)bookIndex.scrollTo({left:bl-24,behavior:reduceMotion.matches?"auto":"smooth"})}
+  });
+}
+function scrollToIdx(i,instant){
+  i=Math.max(0,Math.min(PAGES.length-1,i));
+  const el=$(PAGES[i].id);if(!el)return;
+  bookScroll.scrollTo({top:el.offsetTop-20,behavior:(instant||reduceMotion.matches)?"auto":"smooth"});
+}
+function goTo(slug,instant){
+  const s=SECTIONS.find(x=>x.slug===slug);if(!s)return;
+  const i=PAGES.findIndex(p=>p.n===s.from);scrollToIdx(i,instant);
+}
+function openBook(slug){
+  lastTrigger=document.activeElement;
+  buildBook();closeDock();subtitle.classList.remove("show");stopSpeaking();
+  book.hidden=false;
+  if(slug)requestAnimationFrame(()=>goTo(slug,true));
+  bookScroll.focus({preventScroll:true});
+}
+function closeBook(){book.hidden=true;if(lastTrigger&&lastTrigger.focus)lastTrigger.focus({preventScroll:true})}
+$("openProjects").onclick=()=>openBook();
+$("openPortfolio").onclick=()=>openBook();
+$("bookClose").onclick=closeBook;
+
+/* ---------- Zoom ---------- */
+let zoomTrigger=null;
+function openZoom(p,e,img){
+  zoomTrigger=e.currentTarget;
+  const r=img.getBoundingClientRect();
+  const fx=r.width?Math.min(1,Math.max(0,(e.clientX-r.left)/r.width)):.5;
+  const fy=r.height?Math.min(1,Math.max(0,(e.clientY-r.top)/r.height)):.5;
+  zoomLabel.textContent=`${p.sec.name} · ${p.pp}`;
+  zoomImg.alt=img.alt;
+  zoom.hidden=false;
+  const center=()=>{zoomScroll.scrollLeft=fx*zoomScroll.scrollWidth-zoomScroll.clientWidth/2;zoomScroll.scrollTop=fy*zoomScroll.scrollHeight-zoomScroll.clientHeight/2};
+  zoomImg.onload=center;
+  zoomImg.src=`pages/lg/${p.id}.webp`;
+  if(zoomImg.complete)requestAnimationFrame(center);
+  $("zoomClose").focus({preventScroll:true});
+}
+function closeZoom(){zoom.hidden=true;zoomImg.removeAttribute("src");if(zoomTrigger)zoomTrigger.focus({preventScroll:true})}
+$("zoomClose").onclick=closeZoom;
+(()=>{let down=null;
+  zoomScroll.addEventListener("pointerdown",e=>{if(e.pointerType!=="mouse")return;down={x:e.clientX,y:e.clientY,l:zoomScroll.scrollLeft,t:zoomScroll.scrollTop};zoomScroll.classList.add("dragging");zoomScroll.setPointerCapture(e.pointerId)});
+  zoomScroll.addEventListener("pointermove",e=>{if(!down)return;zoomScroll.scrollLeft=down.l-(e.clientX-down.x);zoomScroll.scrollTop=down.t-(e.clientY-down.y)});
+  const up=()=>{down=null;zoomScroll.classList.remove("dragging")};
+  zoomScroll.addEventListener("pointerup",up);zoomScroll.addEventListener("pointercancel",up);
+})();
+
+/* ---------- Keyboard ---------- */
+document.addEventListener("keydown",e=>{
+  if(e.metaKey||e.ctrlKey||e.altKey)return;
+  if(e.key==="Escape"){
+    if(!zoom.hidden){closeZoom();return}
+    if(!book.hidden){closeBook();return}
+    closeDock();subtitle.classList.remove("show");stopSpeaking();return;
+  }
+  if(!zoom.hidden)return;
+  if(!book.hidden){
+    if(e.key==="ArrowRight"){e.preventDefault();scrollToIdx(currentIdx+1)}
+    else if(e.key==="ArrowLeft"){e.preventDefault();scrollToIdx(currentIdx-1)}
+    return;
+  }
+  if(e.key&&e.key.toLowerCase()==="e"&&!e.repeat)openBook();
+});
+
+/* ---------- Deep links: #portfolio or a section, e.g. #pigro ---------- */
+function openFromHash(){
+  const h=(location.hash||"").slice(1).toLowerCase();
+  if(!h)return;
+  if(h==="portfolio"||h==="projects"||h==="progetti"){if(book.hidden)openBook()}
+  else if(SECTIONS.some(s=>s.slug===h)){if(book.hidden)openBook(h);else goTo(h)}
+}
+openFromHash();
+window.addEventListener("hashchange",openFromHash);
 </script>
 </body>
 </html>
