@@ -24,6 +24,9 @@
 <link rel="preload" as="image" href="assets/speak2.jpg">
 <link rel="preload" as="image" href="assets/speak3.jpg">
 <link rel="preload" as="image" href="assets/speak4.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=VT323&display=swap">
 
 <style>
 *{box-sizing:border-box}
@@ -42,7 +45,8 @@ button{font:inherit}
 .overlay{background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(0,0,0,.055));z-index:10}
 .vignette{background:radial-gradient(circle at 50% 45%,transparent 42%,rgba(0,0,0,.13) 100%);z-index:11}
 .grain{z-index:12;opacity:.06;background-image:radial-gradient(circle,rgba(0,0,0,.17) 1px,transparent 1px);background-size:10px 10px;mix-blend-mode:multiply}
-.ui{position:absolute;inset:0;z-index:20}
+.ui{position:absolute;inset:0;z-index:20;pointer-events:none}
+.ui>*{pointer-events:auto}
 .brand{position:absolute;top:28px;left:38px;color:rgba(255,255,255,.96);font-size:14px;letter-spacing:3.4px;text-transform:uppercase}
 .topBtn{position:absolute;top:18px;right:28px;border:1px solid rgba(30,30,30,.45);background:rgba(242,244,240,.14);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-radius:999px;color:#111;padding:14px 24px;font-size:12px;letter-spacing:2px;text-transform:uppercase;cursor:pointer}
 .talkBtn{position:absolute;left:50%;top:57%;transform:translate(-50%,-50%);border:1px solid rgba(255,255,255,.78);background:rgba(15,15,15,.45);color:#fff;padding:13px 24px;border-radius:999px;font-size:12px;letter-spacing:2.2px;text-transform:uppercase;cursor:pointer;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
@@ -69,7 +73,58 @@ button{font:inherit}
 .pdfClose,.pdfOpen{border:1px solid rgba(255,255,255,.24);background:rgba(255,255,255,.06);color:white;border-radius:999px;padding:10px 14px;cursor:pointer;text-transform:uppercase;letter-spacing:1.8px;font-size:11px;text-decoration:none;font-family:inherit}
 .pdfFrame{position:absolute;inset:72px 24px 24px;background:#111;border-radius:14px;overflow:hidden}
 .pdfFrame iframe{width:100%;height:100%;border:0;background:white}
+
+/* ---- Nokia on the table ---- */
+/* .stageWrap matches the scene layers exactly (same inset, same parallax transform); .stage is a 16:9 box sized like background-size:cover, so anything placed in image percentages stays glued to the photo. */
+.stageWrap{position:absolute;inset:-1.5%;overflow:hidden;pointer-events:none;z-index:5;transition:transform .18s ease-out;will-change:transform}
+.stage{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:100%;aspect-ratio:16/9}
+.nokia{position:absolute;left:14.5%;top:59%;width:8.2%;padding:0;border:0;background:transparent;cursor:pointer;pointer-events:auto;transform-origin:50% 50%;transform:perspective(700px) rotateX(52deg) rotateZ(-16deg);filter:drop-shadow(6px 10px 9px rgba(0,0,0,.34)) drop-shadow(0 1px 2px rgba(0,0,0,.25));transition:transform .25s ease-out,filter .25s ease-out;-webkit-tap-highlight-color:transparent}
+.nokia:hover,.nokia:focus-visible{transform:perspective(700px) rotateX(50deg) rotateZ(-16deg) translateY(-3px);filter:drop-shadow(8px 14px 12px rgba(0,0,0,.36)) drop-shadow(0 1px 2px rgba(0,0,0,.25));outline:0}
+.nokia svg,.nokia img{display:block;width:100%;height:auto}
+.nokia .lcdOff{fill:#7c8a66}
+.nokia .lcdOn{fill:#b6e08a;opacity:0;transition:opacity .15s}
+.nokia.lit .lcdOn{opacity:1}
+.nokia.lit .lcdText{opacity:1}
+.nokia .lcdText{opacity:0;transition:opacity .15s}
+@keyframes ring{0%,100%{transform:perspective(700px) rotateX(52deg) rotateZ(-16deg)}20%{transform:perspective(700px) rotateX(52deg) rotateZ(-13deg) translateX(2px)}40%{transform:perspective(700px) rotateX(52deg) rotateZ(-19deg) translateX(-2px)}60%{transform:perspective(700px) rotateX(52deg) rotateZ(-13deg) translateX(2px)}80%{transform:perspective(700px) rotateX(52deg) rotateZ(-19deg) translateX(-2px)}}
+.nokia.ring{animation:ring .42s linear}
+@media(prefers-reduced-motion:reduce){.nokia.ring{animation:none}}
+.contactHint{right:auto;left:8.5%;bottom:42%}
+
+/* ---- Contacts screen ---- */
+.phoneModal{position:fixed;inset:0;z-index:40;display:none;place-items:center;background:rgba(8,8,8,.86);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.phoneModal.show{display:grid}
+.phoneBody{position:relative;width:min(340px,86vw);background:linear-gradient(180deg,#2b2f3a,#181b23 60%,#111318);border-radius:44px 44px 62px 62px/40px 40px 90px 90px;padding:38px 26px 30px;box-shadow:0 30px 80px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.14),inset 0 -6px 12px rgba(0,0,0,.5);color:#dfe3ea;font-family:Inter,Arial,Helvetica,sans-serif}
+.phoneBody::before{content:"";position:absolute;left:50%;top:18px;transform:translateX(-50%);width:34px;height:4px;border-radius:2px;background:#0a0b0e;box-shadow:inset 0 1px 1px rgba(0,0,0,.8)}
+.phoneBrand{text-align:center;font-size:10px;letter-spacing:4px;text-transform:uppercase;color:#8a90a0;margin-bottom:12px}
+.lcd{position:relative;background:#98be6a;background:linear-gradient(180deg,#a6cc78,#8fb662);border:6px solid #0c0d10;border-radius:10px;padding:10px 10px 8px;font-family:'VT323',ui-monospace,Menlo,Consolas,monospace;color:#0f1d0a;text-transform:none;box-shadow:inset 0 0 0 1px rgba(0,0,0,.25),inset 0 6px 14px rgba(0,0,0,.18);text-shadow:0 0 .6px rgba(15,29,10,.6)}
+.lcd::after{content:"";position:absolute;inset:0;pointer-events:none;border-radius:4px;background-image:repeating-linear-gradient(0deg,rgba(0,0,0,.06) 0 1px,transparent 1px 3px);opacity:.7}
+.lcdHead{display:flex;justify-content:space-between;align-items:baseline;font-size:20px;line-height:1;border-bottom:2px solid rgba(15,29,10,.55);padding-bottom:5px;margin-bottom:6px}
+.lcdHead small{font-size:14px}
+.lcdList{list-style:none;margin:0;padding:0;display:grid;gap:2px}
+.lcdItem{display:grid;grid-template-columns:14px 1fr;gap:6px;align-items:baseline;padding:3px 4px;border:0;background:transparent;font:inherit;color:inherit;text-align:left;cursor:pointer;line-height:1.05;border-radius:2px;width:100%}
+.lcdItem .mark{font-size:18px;opacity:0}
+.lcdItem .lab{font-size:19px;letter-spacing:.5px;display:block}
+.lcdItem .val{font-size:14px;opacity:.85;display:block;word-break:break-all}
+.lcdItem:focus{outline:0}
+.lcdItem.sel{background:#0f1d0a;color:#b6e08a;text-shadow:none}
+.lcdItem.sel .mark{opacity:1}
+.lcdFoot{display:flex;justify-content:space-between;font-size:16px;margin-top:8px;padding-top:5px;border-top:2px solid rgba(15,29,10,.55)}
+.lcdFoot span{cursor:pointer}
+.lcdToast{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:#0f1d0a;color:#b6e08a;padding:6px 14px;font-size:18px;border-radius:2px;opacity:0;transition:opacity .15s;pointer-events:none;white-space:nowrap}
+.lcdToast.show{opacity:1}
+.keys{display:grid;grid-template-columns:repeat(3,1fr);gap:8px 12px;margin-top:20px}
+.navRow{display:grid;grid-template-columns:1fr 1.6fr 1fr;gap:10px;margin-top:16px;align-items:center}
+.key,.softkey{border:0;font:inherit;color:#e6e9ef;background:linear-gradient(180deg,#3a3f4c,#232732);border-radius:14px;padding:9px 0;font-size:13px;letter-spacing:1px;box-shadow:0 2px 0 #0b0c10,inset 0 1px 0 rgba(255,255,255,.14);cursor:pointer;text-transform:uppercase}
+.key small{display:block;font-size:8px;letter-spacing:2px;color:#9aa0b0;margin-top:1px}
+.key:active,.softkey:active{transform:translateY(1px);box-shadow:0 1px 0 #0b0c10}
+.softkey.clear{color:#ffb6b0}
+.navKey{border-radius:999px;padding:10px 0;font-size:11px;letter-spacing:2px}
+.phoneClose{position:absolute;top:18px;right:24px;border:1px solid rgba(255,255,255,.24);background:rgba(255,255,255,.06);color:white;border-radius:999px;padding:10px 14px;cursor:pointer;text-transform:uppercase;letter-spacing:1.8px;font-size:11px;font-family:inherit}
+
 @media(max-width:900px){
+  .contactHint{left:auto;right:16px;bottom:calc(24vh + 52px);font-size:12px}
+  .nokia{display:none}
   .brand{font-size:11px;left:18px;top:20px}
   .topBtn{right:16px;top:14px;padding:12px 16px;font-size:10px}
   .talkBtn{top:auto;bottom:30vh}
@@ -95,20 +150,79 @@ button{font:inherit}
     <div class="sceneLayer" id="scene3"></div>
     <div class="sceneLayer" id="scene4"></div>
   </div>
+  <div class="stageWrap" id="stageWrap">
+    <div class="stage" id="stage">
+      <button class="nokia" id="nokia" aria-label="Open contacts" title="Contatti (C)">
+        <!-- Placeholder drawing. Drop a transparent assets/nokia.png in the repo and it replaces this automatically. -->
+        <svg viewBox="0 0 120 246" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs>
+            <linearGradient id="nkBody" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#3c4150"/><stop offset=".5" stop-color="#262a35"/><stop offset="1" stop-color="#15181f"/></linearGradient>
+            <linearGradient id="nkKey" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4a505e"/><stop offset="1" stop-color="#2a2e39"/></linearGradient>
+          </defs>
+          <path d="M22 4h76c9 0 15 6 16 16l4 78c1 20 0 40-3 60l-9 66c-2 12-9 18-20 18H34c-11 0-18-6-20-18L5 158c-3-20-4-40-3-60l4-78C7 10 13 4 22 4z" fill="url(#nkBody)"/>
+          <path d="M24 9h72c6 0 10 4 11 11l3 74c1 18 0 36-2 54l-8 62c-1 9-6 13-14 13H36c-8 0-13-4-14-13l-8-62c-2-18-3-36-2-54l3-74c1-7 5-11 11-11z" fill="none" stroke="rgba(255,255,255,.08)"/>
+          <rect x="8" y="2" width="12" height="10" rx="3" fill="#1b1e26"/>
+          <rect x="22" y="30" width="76" height="52" rx="5" fill="#0c0d10"/>
+          <rect class="lcdOff" x="26" y="34" width="68" height="44" rx="3"/>
+          <rect class="lcdOn" x="26" y="34" width="68" height="44" rx="3"/>
+          <g class="lcdText" font-family="VT323,monospace" font-size="11" fill="#0f1d0a">
+            <text x="30" y="47">Contacts</text><text x="30" y="60">&gt; Email</text><text x="30" y="72">  Instagram</text>
+          </g>
+          <text x="60" y="94" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="7" letter-spacing="2" fill="#8a90a0">NOKIA</text>
+          <rect x="43" y="100" width="34" height="14" rx="7" fill="url(#nkKey)"/>
+          <rect x="16" y="102" width="20" height="10" rx="4" fill="url(#nkKey)"/>
+          <rect x="84" y="102" width="20" height="10" rx="4" fill="#5a2b2b"/>
+          <text x="94" y="110" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="8" font-weight="700" fill="#ffb6b0">C</text>
+          <g fill="url(#nkKey)">
+            <rect x="18" y="122" width="24" height="15" rx="6"/><rect x="48" y="122" width="24" height="15" rx="6"/><rect x="78" y="122" width="24" height="15" rx="6"/>
+            <rect x="18" y="143" width="24" height="15" rx="6"/><rect x="48" y="143" width="24" height="15" rx="6"/><rect x="78" y="143" width="24" height="15" rx="6"/>
+            <rect x="19" y="164" width="24" height="15" rx="6"/><rect x="48" y="164" width="24" height="15" rx="6"/><rect x="77" y="164" width="24" height="15" rx="6"/>
+            <rect x="21" y="185" width="24" height="15" rx="6"/><rect x="48" y="185" width="24" height="15" rx="6"/><rect x="75" y="185" width="24" height="15" rx="6"/>
+          </g>
+          <g font-family="Inter,Arial,sans-serif" font-size="8" fill="#e6e9ef" text-anchor="middle">
+            <text x="30" y="133">1</text><text x="60" y="133">2</text><text x="90" y="133">3</text>
+            <text x="30" y="154">4</text><text x="60" y="154">5</text><text x="90" y="154">6</text>
+            <text x="31" y="175">7</text><text x="60" y="175">8</text><text x="89" y="175">9</text>
+            <text x="33" y="196">*</text><text x="60" y="196">0</text><text x="87" y="196">#</text>
+          </g>
+        </svg>
+      </button>
+    </div>
+  </div>
   <div class="overlay"></div><div class="vignette"></div><div class="grain"></div>
   <section class="ui">
     <div class="brand">ALESSANDRO CASTELLANI</div>
     <button class="topBtn" id="openProjects">VAI AI PROGETTI →</button>
     <button class="talkBtn" id="talkBtn">TALK TO ME</button>
     <button class="openHint" id="openPortfolio"><span class="keyCap">E</span><span>APRI IL PORTFOLIO</span></button>
+    <button class="openHint contactHint" id="openContacts"><span class="keyCap">C</span><span>CONTATTI</span></button>
     <div class="questionDock" id="questionDock">
       <div class="dockTop"><div class="dockEyebrow">Interactive interview</div><button class="dockClose" id="dockClose" aria-label="Close">×</button></div>
       <div class="questions" id="questions"></div>
     </div>
     <div class="subtitle" id="subtitle"><span class="label">Alessandro speaking</span><span class="questionLabel" id="questionLabel"></span><span id="subtitleText"></span></div>
-    <div class="cornerNote">MOVE THE MOUSE / PRESS E / ESCAPE TO CLOSE</div>
+    <div class="cornerNote">MOVE THE MOUSE / PRESS E / PRESS C / ESCAPE TO CLOSE</div>
   </section>
 </main>
+
+<section class="phoneModal" id="phoneModal" role="dialog" aria-modal="true" aria-label="Contacts">
+  <button class="phoneClose" id="phoneClose">Close</button>
+  <div class="phoneBody">
+    <div class="phoneBrand">Nokia</div>
+    <div class="lcd">
+      <div class="lcdHead"><span>Contacts</span><small id="lcdCount"></small></div>
+      <ul class="lcdList" id="lcdList"></ul>
+      <div class="lcdFoot"><span id="lcdSelect">Select</span><span id="lcdCopy">Copy</span><span id="lcdBack">Back</span></div>
+      <div class="lcdToast" id="lcdToast">Copied</div>
+    </div>
+    <div class="navRow">
+      <button class="softkey" id="skSelect">Select</button>
+      <div style="display:grid;gap:6px"><button class="key navKey" id="skUp">▲</button><button class="key navKey" id="skDown">▼</button></div>
+      <button class="softkey clear" id="skBack">C</button>
+    </div>
+    <div class="keys" id="keypad"></div>
+  </div>
+</section>
 
 <section class="pdfModal" id="pdfModal">
   <div class="pdfTop">
@@ -123,6 +237,13 @@ button{font:inherit}
 
 <script>
 const PDF_URL='assets/portfolio.pdf';
+// Contacts shown on the Nokia. Edit here only.
+const contacts=[
+  {label:"Email",value:"a.castellani2002@gmail.com",href:"mailto:a.castellani2002@gmail.com",copy:"a.castellani2002@gmail.com"},
+  {label:"Instagram",value:"@011kaste",href:"https://www.instagram.com/011kaste/",copy:"https://www.instagram.com/011kaste/"},
+  {label:"LinkedIn",value:"alessandro-castellani",href:"https://www.linkedin.com/in/alessandro-castellani",copy:"https://www.linkedin.com/in/alessandro-castellani"},
+  {label:"Phone",value:"+39 334 935 2928",href:"tel:+393349352928",copy:"+39 334 935 2928"}
+];
 const interview=[{"q": "Tell me about yourself.", "a": "I\u2019m Alessandro Castellani, a communication designer and strategist. My work sits between research, storytelling, branding and visual culture, with a strong interest in contemporary art and editorial thinking."}, {"q": "What kind of projects do you work on?", "a": "I work on projects that mix concept, strategy and communication design. In the portfolio you\u2019ll find branding, cultural positioning, integrated campaigns, archival thinking and editorial or curatorial work."}, {"q": "How do you approach strategy?", "a": "I usually begin with observation and context. I look for tensions, habits and contradictions, then build an insight and a clear positioning before translating it into narrative, form and communication."}, {"q": "Show me something you\u2019re proud of.", "a": "One project I\u2019m proud of is Nikon Base-Archive, where I reframed Nikon around authenticity and visual evidence, turning photography into something to preserve, certify and experience as proof of reality."}, {"q": "Why the United States?", "a": "Because I want to place my work in a context where strategy, design, storytelling and experience can really intersect. I want the portfolio itself to act as a case study of how I think, not just a container of finished work."}];
 const exp=document.getElementById('experience'),dock=document.getElementById('questionDock'),qEl=document.getElementById('questions'),subtitle=document.getElementById('subtitle'),subtitleText=document.getElementById('subtitleText'),questionLabel=document.getElementById('questionLabel'),pdfModal=document.getElementById('pdfModal'),pdfFrame=document.getElementById('pdfFrame');
 const layers=[...document.querySelectorAll('.sceneLayer')],idle=document.getElementById('sceneIdle'),frames=[scene1,scene2,scene3,scene4];
@@ -146,10 +267,58 @@ document.getElementById('dockClose').onclick=()=>dock.classList.remove('show');
 document.getElementById('openProjects').onclick=openPdf;
 document.getElementById('openPortfolio').onclick=openPdf;
 document.getElementById('pdfClose').onclick=closePdf;
-document.addEventListener('keydown',e=>{if(e.key.toLowerCase()==='e')openPdf();if(e.key==='Escape'){closePdf();dock.classList.remove('show');subtitle.classList.remove('show');stopSpeaking()}});
-exp.addEventListener('mousemove',e=>{const r=exp.getBoundingClientRect(),x=(e.clientX-r.width/2)/r.width,y=(e.clientY-r.height/2)/r.height;layers.forEach(l=>l.style.transform=`translate3d(${(x*-14).toFixed(1)}px,${(y*-9).toFixed(1)}px,0) scale(1.018)`)});
-exp.addEventListener('mouseleave',()=>layers.forEach(l=>l.style.transform='scale(1.018)'));
-layers.forEach(l=>l.style.transform='scale(1.018)');
+
+// ---- Stage: keep the phone glued to the photo whatever the viewport ratio ----
+const stageWrap=document.getElementById('stageWrap'),stage=document.getElementById('stage');
+function sizeStage(){const W=stageWrap.clientWidth,H=stageWrap.clientHeight,s=Math.max(W/16,H/9);stage.style.width=(16*s)+'px';stage.style.height=(9*s)+'px'}
+new ResizeObserver(sizeStage).observe(stageWrap);sizeStage();
+// If a real photo of the phone is added as assets/nokia.png, use it instead of the drawing.
+const nokia=document.getElementById('nokia');
+(()=>{const im=new Image();im.onload=()=>{nokia.replaceChildren(im)};im.alt='';im.src='assets/nokia.png'})();
+
+// ---- Contacts (the Nokia) ----
+const phoneModal=document.getElementById('phoneModal'),lcdList=document.getElementById('lcdList'),lcdToast=document.getElementById('lcdToast'),lcdCount=document.getElementById('lcdCount');
+let sel=0,toastT=null,ringT=null;
+contacts.forEach((c,i)=>{const li=document.createElement('li');const b=document.createElement('button');b.className='lcdItem';b.innerHTML=`<span class="mark">&gt;</span><span><span class="lab">${c.label}</span><span class="val">${c.value}</span></span>`;b.onmouseenter=()=>select(i);b.onfocus=()=>select(i);b.onclick=()=>{select(i);activate()};li.appendChild(b);lcdList.appendChild(li)});
+const items=[...lcdList.querySelectorAll('.lcdItem')];
+function select(i){sel=(i+contacts.length)%contacts.length;items.forEach((el,k)=>el.classList.toggle('sel',k===sel));lcdCount.textContent=`${sel+1}/${contacts.length}`;if(document.activeElement!==items[sel]&&phoneModal.classList.contains('show'))items[sel].focus({preventScroll:true})}
+function activate(){const c=contacts[sel];if(c.href.startsWith('http'))window.open(c.href,'_blank','noopener');else location.href=c.href}
+function toast(msg){lcdToast.textContent=msg;lcdToast.classList.add('show');clearTimeout(toastT);toastT=setTimeout(()=>lcdToast.classList.remove('show'),1100)}
+function copySel(){const t=contacts[sel].copy;if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(t).then(()=>toast('Copied'),()=>toast(t));else toast(t)}
+function openContacts(){if(phoneModal.classList.contains('show'))return;dock.classList.remove('show');nokia.classList.add('lit');const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;nokia.classList.remove('ring');void nokia.offsetWidth;if(!reduce)nokia.classList.add('ring');clearTimeout(ringT);ringT=setTimeout(()=>{phoneModal.classList.add('show');select(sel);items[sel].focus({preventScroll:true})},reduce?0:380)}
+function closeContacts(){clearTimeout(ringT);phoneModal.classList.remove('show');nokia.classList.remove('lit','ring')}
+nokia.onclick=openContacts;
+document.getElementById('openContacts').onclick=openContacts;
+document.getElementById('phoneClose').onclick=closeContacts;
+document.getElementById('skBack').onclick=closeContacts;
+document.getElementById('lcdBack').onclick=closeContacts;
+document.getElementById('skSelect').onclick=activate;
+document.getElementById('lcdSelect').onclick=activate;
+document.getElementById('lcdCopy').onclick=copySel;
+document.getElementById('skUp').onclick=()=>select(sel-1);
+document.getElementById('skDown').onclick=()=>select(sel+1);
+phoneModal.addEventListener('click',e=>{if(e.target===phoneModal)closeContacts()});
+// Decorative keypad; the 0 key copies the selected contact, like a shortcut.
+const keypad=document.getElementById('keypad');
+['1','2 abc','3 def','4 ghi','5 jkl','6 mno','7 pqrs','8 tuv','9 wxyz','*','0 copy','#'].forEach(k=>{const [n,l]=k.split(' ');const b=document.createElement('button');b.className='key';b.innerHTML=`${n}<small>${l||'&nbsp;'}</small>`;if(n==='0')b.onclick=copySel;else if(n==='#')b.onclick=closeContacts;keypad.appendChild(b)});
+
+document.addEventListener('keydown',e=>{
+  const k=e.key.toLowerCase(),open=phoneModal.classList.contains('show');
+  if(open){
+    if(e.key==='ArrowDown'){e.preventDefault();select(sel+1)}
+    else if(e.key==='ArrowUp'){e.preventDefault();select(sel-1)}
+    else if(e.key==='Enter'){e.preventDefault();activate()}
+    else if(k==='c'||e.key==='Escape'||e.key==='Backspace'){e.preventDefault();closeContacts()}
+    else if(k==='0'||((e.metaKey||e.ctrlKey)&&k==='c')){copySel()}
+    return
+  }
+  if(k==='c'&&!e.metaKey&&!e.ctrlKey&&!e.altKey)openContacts();
+  if(k==='e')openPdf();
+  if(e.key==='Escape'){closePdf();dock.classList.remove('show');subtitle.classList.remove('show');stopSpeaking()}
+});
+exp.addEventListener('mousemove',e=>{const r=exp.getBoundingClientRect(),x=(e.clientX-r.width/2)/r.width,y=(e.clientY-r.height/2)/r.height;const t=`translate3d(${(x*-14).toFixed(1)}px,${(y*-9).toFixed(1)}px,0) scale(1.018)`;layers.forEach(l=>l.style.transform=t);stageWrap.style.transform=t});
+exp.addEventListener('mouseleave',()=>{layers.forEach(l=>l.style.transform='scale(1.018)');stageWrap.style.transform='scale(1.018)'});
+layers.forEach(l=>l.style.transform='scale(1.018)');stageWrap.style.transform='scale(1.018)';
 </script>
 </body>
 </html>
