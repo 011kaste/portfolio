@@ -76,12 +76,10 @@ button:focus-visible,a:focus-visible{outline:2px solid #fff;outline-offset:3px;b
 .ui{position:absolute;inset:0;z-index:20;pointer-events:none}
 .ui>*{pointer-events:auto}
 .brand{position:absolute;top:28px;left:38px;color:rgba(255,255,255,.96);font-size:14px;letter-spacing:3.4px;text-transform:uppercase;text-shadow:0 1px 14px rgba(0,0,0,.3)}
-.talkBtn{position:absolute;left:50%;top:57%;transform:translate(-50%,-50%);display:flex;align-items:center;gap:10px;border:1px solid rgba(255,255,255,.78);background:rgba(15,15,15,.45);color:#fff;padding:11px 22px 11px 14px;border-radius:999px;font-size:12px;letter-spacing:2.2px;text-transform:uppercase;cursor:pointer;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);transition:background .2s}
-.talkBtn:hover{background:rgba(15,15,15,.72)}
+.openHint.talkBtn{left:50%;top:57%;right:auto;bottom:auto;transform:translate(-50%,-50%)}
 .openHint{position:absolute;right:14.4%;bottom:24.3%;display:flex;align-items:center;gap:10px;color:#191919;background:rgba(245,246,241,.30);padding:8px 12px;border-radius:10px;font-size:14px;letter-spacing:1.1px;text-transform:uppercase;cursor:pointer;border:0;transition:background .2s}
 .openHint:hover{background:rgba(245,246,241,.62)}
 .keyCap{width:24px;height:24px;border:1px solid #222;display:grid;place-items:center;border-radius:4px;font-size:11px;background:rgba(255,255,255,.5)}
-.talkBtn .keyCap{border-color:rgba(255,255,255,.7);background:rgba(255,255,255,.16);color:#fff}
 .kbd{display:inline-grid;place-items:center;margin-left:9px;padding:0 5px;height:18px;border:1px solid rgba(255,255,255,.4);border-radius:4px;font-size:9px;letter-spacing:1px;color:rgba(255,255,255,.85)}
 .pill:hover .kbd{border-color:rgba(0,0,0,.4);color:var(--night)}
 
@@ -103,7 +101,7 @@ button:focus-visible,a:focus-visible{outline:2px solid #fff;outline-offset:3px;b
 @media (min-width:901px){
   .experience.dockOpen .subtitle{--sw:min(1030px,68vw,calc(100vw - 492px));width:var(--sw);left:max(50%,calc(468px + var(--sw) / 2))}
 }
-@media (hover:none){.cornerNote,.keyCap,.kbd{display:none}.talkBtn{padding:13px 24px}}
+@media (hover:none){.cornerNote,.keyCap,.kbd{display:none}}
 
 /* ---- Nokia on the table ---- */
 /* .stageWrap matches the scene layers exactly (same inset, same parallax transform); .stage is a 16:9 box sized like background-size:cover, so anything placed in image percentages stays glued to the photo. */
@@ -130,15 +128,16 @@ button:focus-visible,a:focus-visible{outline:2px solid #fff;outline-offset:3px;b
 .bigPhone .lcdTxt{display:none}
 /* Percentages below are the LCD rectangle of the SVG (x44 y66 w112 h98 in a 200x420 viewBox). */
 .lcdUI{position:absolute;left:22%;top:15.72%;width:56%;height:23.33%;padding:4% 4.5% 3%;font-family:'VT323',ui-monospace,Menlo,Consolas,monospace;color:#10200b;display:flex;flex-direction:column;container-type:size;background-image:repeating-linear-gradient(0deg,rgba(0,0,0,.05) 0 1px,transparent 1px 3px)}
-.lcdHead{display:flex;justify-content:space-between;align-items:baseline;font-size:13cqh;line-height:1;border-bottom:1.2cqh solid rgba(16,32,11,.6);padding-bottom:1.5cqh}
-.lcdList{list-style:none;margin:1.5cqh 0 0;padding:0;flex:1;display:grid;grid-auto-rows:1fr}
-.lcdItem{display:flex;gap:4cqw;align-items:center;padding:0 2cqw;border:0;background:transparent;font:inherit;color:inherit;text-align:left;cursor:pointer;line-height:1;font-size:12cqh;width:100%;border-radius:1px}
+.lcdHead{display:flex;justify-content:space-between;align-items:baseline;font-size:11cqh;line-height:1;border-bottom:1.2cqh solid rgba(16,32,11,.6);padding-bottom:1.5cqh;white-space:nowrap}
+.lcdList{list-style:none;margin:1cqh 0 0;padding:0;flex:1;min-height:0;display:grid;grid-template-rows:repeat(4,minmax(0,1fr));overflow:hidden}
+.lcdList li{min-height:0;display:flex}
+.lcdItem{display:flex;gap:3cqw;align-items:center;padding:0 2cqw;border:0;background:transparent;font:inherit;color:inherit;text-align:left;cursor:pointer;line-height:1;font-size:9.6cqh;width:100%;min-height:0;overflow:hidden;white-space:nowrap;border-radius:1px}
 .lcdItem::before{content:"";width:0;height:0;border:2.2cqh solid transparent;border-left-color:currentColor;opacity:0;flex:none}
 .lcdItem.sel{background:#10200b;color:#a9cf70}
 .lcdItem.sel::before{opacity:1}
 .lcdItem:focus{outline:0}
-.lcdVal{font-size:9.5cqh;line-height:1.05;word-break:break-all;border-top:1px solid rgba(16,32,11,.4);padding-top:1.5cqh;margin-top:1cqh;min-height:2.1em}
-.lcdFoot{display:flex;justify-content:space-between;font-size:10cqh;margin-top:1cqh}
+.lcdVal{font-size:8cqh;line-height:1.1;word-break:break-all;border-top:1px solid rgba(16,32,11,.4);padding-top:1cqh;margin-top:1cqh;height:2.2em;overflow:hidden}
+.lcdFoot{display:flex;justify-content:space-between;font-size:9cqh;line-height:1;margin-top:auto;padding-top:1cqh}
 .lcdFoot span{cursor:pointer}
 .lcdToast{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:#10200b;color:#a9cf70;padding:1.5cqh 4cqw;font-size:13cqh;opacity:0;transition:opacity .15s;pointer-events:none;white-space:nowrap;max-width:96%;overflow:hidden;text-overflow:ellipsis}
 .lcdToast.show{opacity:1}
@@ -195,7 +194,7 @@ a.pill{text-decoration:none;display:inline-block}
 
 @media (max-width:900px){
   .brand{font-size:11px;left:18px;top:calc(20px + env(safe-area-inset-top,0px));max-width:calc(100% - 36px);line-height:1.5}
-  .talkBtn{top:auto;bottom:30vh}
+  .openHint.talkBtn{top:auto;bottom:30vh;right:auto;transform:translateX(-50%)}
   .openHint{right:16px;bottom:24vh;font-size:12px;background:rgba(245,246,241,.72)}
   .contactHint{left:auto;right:16px;bottom:calc(24vh + 52px)}
   .nokia{display:none}
@@ -279,7 +278,7 @@ a.pill{text-decoration:none;display:inline-block}
   <div class="overlay"></div><div class="vignette"></div><div class="grain"></div>
   <section class="ui">
     <div class="brand">Alessandro Castellani</div>
-    <button class="talkBtn" id="talkBtn" type="button" aria-controls="questionDock" aria-expanded="false"><span class="keyCap" aria-hidden="true">T</span><span>Talk to me</span></button>
+    <button class="openHint talkBtn" id="talkBtn" type="button" aria-controls="questionDock" aria-expanded="false"><span class="keyCap" aria-hidden="true">T</span><span>Talk to me</span></button>
     <button class="openHint" id="openPortfolio" type="button"><span class="keyCap" aria-hidden="true">E</span><span>Open the portfolio</span></button>
     <button class="openHint contactHint" id="openContacts" type="button"><span class="keyCap" aria-hidden="true">C</span><span>Contacts</span></button>
     <div class="questionDock" id="questionDock" role="region" aria-label="Interactive interview">
@@ -333,7 +332,7 @@ a.pill{text-decoration:none;display:inline-block}
 const contacts=[
   {label:"Email",value:"a.castellani2002@gmail.com",href:"mailto:a.castellani2002@gmail.com",copy:"a.castellani2002@gmail.com"},
   {label:"Instagram",value:"@011kaste",href:"https://www.instagram.com/011kaste/",copy:"https://www.instagram.com/011kaste/"},
-  {label:"LinkedIn",value:"alessandro-castellani",href:"https://www.linkedin.com/in/alessandro-castellani",copy:"https://www.linkedin.com/in/alessandro-castellani"},
+  {label:"LinkedIn",value:"alessandro-castellani2002",href:"https://www.linkedin.com/in/alessandro-castellani2002",copy:"https://www.linkedin.com/in/alessandro-castellani2002"},
   {label:"Phone",value:"+39 334 935 2928",href:"tel:+393349352928",copy:"+39 334 935 2928"}
 ];
 const interview=[
