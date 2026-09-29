@@ -121,12 +121,12 @@ button:focus-visible,a:focus-visible{outline:2px solid #fff;outline-offset:3px;b
 .nk.on .lcdTxt{opacity:1}
 
 /* ---- CV folder on the table ---- */
-.cvEnv{position:absolute;left:68.0625%;top:68%;width:24.5%;pointer-events:none}
+.cvEnv{position:absolute;left:68.375%;top:69.7778%;width:17.625%;pointer-events:none}
 .cvEnvImg{display:block;width:100%;height:auto;transition:filter .2s ease-out}
-.cvEnvHit{position:absolute;inset:0;padding:0;border:0;background:transparent;cursor:pointer;pointer-events:auto;clip-path:polygon(0.4% 14.9%,61.2% 3.2%,103.6% 70.4%,15.6% 93.8%);-webkit-tap-highlight-color:transparent}
+.cvEnvHit{position:absolute;inset:0;padding:0;border:0;background:transparent;cursor:pointer;pointer-events:auto;clip-path:polygon(0.4% 16.7%,63.2% 4.5%,102.2% 70.6%,15.3% 91.7%);-webkit-tap-highlight-color:transparent}
 .cvEnvHit:focus-visible{outline:0}
 .cvEnv:has(.cvEnvHit:hover) .cvEnvImg,.cvEnv:has(.cvEnvHit:focus-visible) .cvEnvImg{filter:brightness(1.07)}
-.cvHint{left:84.5%;top:66%;right:auto;bottom:auto;transform:translate(-50%,-50%)}
+.cvHint{left:78%;top:67.5%;right:auto;bottom:auto;transform:translate(-50%,-50%)}
 @media (min-width:901px){#openPortfolio{right:auto;left:64%;top:80.5%;bottom:auto;transform:translate(-50%,-50%)}}
 /* ---- CV viewer ---- */
 .cvScroll{flex:1;min-height:0;overflow:auto;overscroll-behavior:contain;padding:28px 24px 40px;display:flex;justify-content:center;align-items:flex-start;outline:none}
@@ -288,7 +288,7 @@ a.pill{text-decoration:none;display:inline-block}
         </svg>
       </button>
       <div class="cvEnv">
-        <img class="cvEnvImg" src="assets/cv-envelope.webp" width="784" height="368" alt="" decoding="async">
+        <img class="cvEnvImg" src="assets/cv-envelope.webp?v=2" width="564" height="272" alt="" decoding="async">
         <button class="cvEnvHit" id="cvFolder" type="button" aria-label="Open the CV" title="CV (V)"></button>
       </div>
     </div>
