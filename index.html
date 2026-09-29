@@ -120,6 +120,15 @@ button:focus-visible,a:focus-visible{outline:2px solid #fff;outline-offset:3px;b
 .nk .lcdTxt{opacity:0;transition:opacity .15s}
 .nk.on .lcdTxt{opacity:1}
 
+/* ---- CV folder on the table ---- */
+.cvFolder{position:absolute;left:74.4%;top:72%;width:12.5%;padding:0;border:0;background:transparent;cursor:pointer;pointer-events:auto;transform-origin:50% 50%;transform:perspective(900px) rotateX(50deg) rotateZ(-7deg);filter:drop-shadow(4px 9px 8px rgba(0,0,0,.36)) drop-shadow(0 1px 1px rgba(0,0,0,.3));transition:transform .25s ease-out,filter .25s ease-out;-webkit-tap-highlight-color:transparent}
+.cvFolder:hover,.cvFolder:focus-visible{transform:perspective(900px) rotateX(48deg) rotateZ(-7deg) translateY(-3px);filter:drop-shadow(6px 12px 11px rgba(0,0,0,.38)) drop-shadow(0 1px 1px rgba(0,0,0,.3));outline:0}
+.cvFolder svg{display:block;width:100%;height:auto}
+.cvHint{right:6%;bottom:31%;left:auto}
+/* ---- CV viewer ---- */
+.cvScroll{flex:1;min-height:0;overflow:auto;overscroll-behavior:contain;padding:28px 24px 40px;display:flex;justify-content:center;align-items:flex-start;outline:none}
+.cvScroll img{display:block;width:min(100%,820px);height:auto;background:#fff;border-radius:2px;box-shadow:0 18px 60px rgba(0,0,0,.45)}
+
 /* ---- Contacts screen: the same phone, big, with a live LCD laid over its screen ---- */
 .phoneModal{position:fixed;inset:0;z-index:40;display:none;place-items:center;background:rgba(8,8,8,.86);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
 .phoneModal.show{display:grid}
@@ -197,7 +206,9 @@ a.pill{text-decoration:none;display:inline-block}
   .openHint.talkBtn{top:auto;bottom:30vh;right:auto;transform:translateX(-50%)}
   .openHint{right:16px;bottom:24vh;font-size:12px;background:rgba(245,246,241,.72)}
   .contactHint{left:auto;right:16px;bottom:calc(24vh + 52px)}
-  .nokia{display:none}
+  .cvHint{left:auto;right:16px;bottom:calc(24vh + 104px)}
+  .nokia,.cvFolder{display:none}
+  .cvScroll{padding:16px 12px 32px}
   .subtitle{width:auto;left:12px;right:12px;transform:none;bottom:calc(14px + env(safe-area-inset-bottom,0px));font-size:14px}
   .questionDock{left:14px;right:14px;width:auto;bottom:calc(14px + env(safe-area-inset-bottom,0px))}
   .cornerNote{display:none}
@@ -273,6 +284,38 @@ a.pill{text-decoration:none;display:inline-block}
           <circle cx="100" cy="392" r="2.2" fill="#0b0e17"/>
         </svg>
       </button>
+      <button class="cvFolder" id="cvFolder" type="button" aria-label="Open the CV" title="CV (V)">
+        <svg viewBox="0 0 320 232" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs>
+            <linearGradient id="fdBody" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e6c874"/><stop offset=".6" stop-color="#d8b75c"/><stop offset="1" stop-color="#c3a047"/></linearGradient>
+            <linearGradient id="fdTab" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#eacd7c"/><stop offset="1" stop-color="#d6b558"/></linearGradient>
+            <radialGradient id="sauce" cx=".45" cy=".4" r=".6"><stop offset="0" stop-color="#d63a1e" stop-opacity=".92"/><stop offset=".55" stop-color="#b52a12" stop-opacity=".85"/><stop offset="1" stop-color="#8f1d0b" stop-opacity=".7"/></radialGradient>
+            <radialGradient id="halo" cx=".5" cy=".5" r=".5"><stop offset=".55" stop-color="#e8782f" stop-opacity=".32"/><stop offset="1" stop-color="#e8782f" stop-opacity="0"/></radialGradient>
+          </defs>
+          <!-- back cover and the sheet poking out -->
+          <rect x="6" y="20" width="308" height="206" rx="6" fill="#b8953a"/>
+          <path d="M42 14h268a4 4 0 0 1 4 4v198H42z" fill="#f4f1e8" transform="rotate(-1.2 180 110)"/>
+          <path d="M60 40h236M60 56h190M60 72h214M60 88h170" stroke="#c8c3b6" stroke-width="2.2" transform="rotate(-1.2 180 110)"/>
+          <!-- front cover with tab -->
+          <path d="M14 6h84a8 8 0 0 1 8 8v8h198a8 8 0 0 1 8 8v186a6 6 0 0 1-6 6H14a8 8 0 0 1-8-8V14a8 8 0 0 1 8-8z" fill="url(#fdBody)"/>
+          <path d="M14 6h84a8 8 0 0 1 8 8v8H6V14a8 8 0 0 1 8-8z" fill="url(#fdTab)"/>
+          <path d="M6 22h306" stroke="rgba(0,0,0,.12)" stroke-width="1"/>
+          <path d="M296 30v184" stroke="rgba(0,0,0,.08)" stroke-width="1"/>
+          <text x="22" y="18" font-family="Georgia,'Times New Roman',serif" font-style="italic" font-size="11" fill="#5a4416">Curriculum</text>
+          <!-- worn corners and a crease -->
+          <path d="M6 150q40-6 80 0t80 4" stroke="rgba(255,255,255,.18)" stroke-width="1.2" fill="none"/>
+          <!-- tomato sauce -->
+          <ellipse cx="206" cy="126" rx="78" ry="58" fill="url(#halo)"/>
+          <path d="M170 112c4-16 22-26 40-24 10 1 16-10 28-8 14 2 18 14 30 18 12 4 22 12 20 26-2 10-14 12-14 24 0 12-6 26-20 26-10 0-16 12-30 8-12-3-18-14-32-14-16 0-24-14-22-28 1-10 4-18 0-28z" fill="url(#sauce)" stroke="rgba(110,18,4,.5)" stroke-width="1.4" stroke-linejoin="round"/>
+          <path d="M190 122c10-10 26-14 44-8 12 4 22 12 26 22" stroke="rgba(255,255,255,.16)" stroke-width="5" stroke-linecap="round" fill="none"/>
+          <path d="M156 100l-14-18" stroke="#b02c14" stroke-opacity=".7" stroke-width="2.4" stroke-linecap="round"/>
+          <circle cx="140" cy="80" r="3.6" fill="#b02c14" fill-opacity=".8"/>
+          <circle cx="166" cy="176" r="3" fill="#b02c14" fill-opacity=".75"/>
+          <ellipse cx="274" cy="182" rx="6" ry="3.6" fill="#b02c14" fill-opacity=".75" transform="rotate(25 274 182)"/>
+          <circle cx="252" cy="76" r="2.4" fill="#b02c14" fill-opacity=".7"/>
+          <circle cx="126" cy="150" r="1.8" fill="#b02c14" fill-opacity=".7"/>
+        </svg>
+      </button>
     </div>
   </div>
   <div class="overlay"></div><div class="vignette"></div><div class="grain"></div>
@@ -281,12 +324,13 @@ a.pill{text-decoration:none;display:inline-block}
     <button class="openHint talkBtn" id="talkBtn" type="button" aria-controls="questionDock" aria-expanded="false"><span class="keyCap" aria-hidden="true">T</span><span>Talk to me</span></button>
     <button class="openHint" id="openPortfolio" type="button"><span class="keyCap" aria-hidden="true">E</span><span>Open the portfolio</span></button>
     <button class="openHint contactHint" id="openContacts" type="button"><span class="keyCap" aria-hidden="true">C</span><span>Contacts</span></button>
+    <button class="openHint cvHint" id="openCv" type="button"><span class="keyCap" aria-hidden="true">V</span><span>Open the CV</span></button>
     <div class="questionDock" id="questionDock" role="region" aria-label="Interactive interview">
       <div class="dockTop"><div class="dockEyebrow">Interactive interview</div><button class="dockClose" id="dockClose" type="button" aria-label="Close questions">×</button></div>
       <div class="questions" id="questions"></div>
     </div>
     <div class="subtitle" id="subtitle" aria-live="polite"><span class="label">Alessandro speaking</span><span class="questionLabel" id="questionLabel"></span><span id="subtitleText"></span></div>
-    <div class="cornerNote">Move the mouse / T to talk / E for the portfolio / C for contacts / Esc to close</div>
+    <div class="cornerNote">Move the mouse / T to talk / E for the portfolio / V for the CV / C for contacts / Esc to close</div>
   </section>
 </main>
 
@@ -308,6 +352,17 @@ a.pill{text-decoration:none;display:inline-block}
     <button class="hit hit0" id="sk0" aria-label="Copy"></button>
     <button class="hit hitHash" id="skHash" aria-label="Close"></button>
   </div>
+</section>
+
+<section class="book" id="cv" role="dialog" aria-modal="true" aria-label="Alessandro Castellani CV" hidden>
+  <header class="bookBar">
+    <div class="bookTitle">Alessandro Castellani · CV</div>
+    <div class="bookActions">
+      <a class="pill" href="assets/cv.pdf" download="Alessandro_Castellani_CV.pdf">Download PDF</a>
+      <button class="pill" id="cvClose" type="button">Close<span class="kbd" aria-hidden="true">Esc</span></button>
+    </div>
+  </header>
+  <div class="cvScroll" id="cvScroll" tabindex="-1"><img src="assets/cv-page.webp" width="911" height="1288" alt="Alessandro Castellani, curriculum vitae, one page" decoding="async"></div>
 </section>
 
 <section class="book" id="book" role="dialog" aria-modal="true" aria-label="Alessandro Castellani portfolio" hidden>
@@ -536,6 +591,12 @@ document.getElementById('skUp').onclick=()=>select(sel-1);
 document.getElementById('skDown').onclick=()=>select(sel+1);
 phoneModal.addEventListener('click',e=>{if(e.target===phoneModal)closeContacts()});
 
+/* ---------- CV ---------- */
+const cv=$("cv"),cvScroll=$("cvScroll");let cvTrigger=null;
+function openCv(){if(!cv.hidden)return;cvTrigger=document.activeElement;closeDock();subtitle.classList.remove("show");stopSpeaking();cv.hidden=false;cvScroll.focus({preventScroll:true})}
+function closeCv(){cv.hidden=true;if(cvTrigger&&cvTrigger.focus)cvTrigger.focus({preventScroll:true})}
+$("cvFolder").onclick=openCv;$("openCv").onclick=openCv;$("cvClose").onclick=closeCv;
+
 /* ---------- Keyboard ---------- */
 document.addEventListener("keydown",e=>{
   if(phoneModal.classList.contains("show")){
@@ -550,11 +611,13 @@ document.addEventListener("keydown",e=>{
   if(e.metaKey||e.ctrlKey||e.altKey)return;
   if(e.key==="Escape"){
     if(!zoom.hidden){closeZoom();return}
+    if(!cv.hidden){closeCv();return}
     if(!book.hidden){closeBook();return}
     closeDock();subtitle.classList.remove("show");stopSpeaking();return;
   }
   if(!zoom.hidden)return;
   const k=e.key?e.key.toLowerCase():"";
+  if(!cv.hidden){if(k==="v"&&!e.repeat)closeCv();return}
   if(!book.hidden){
     if(e.key==="ArrowRight"){e.preventDefault();scrollToIdx(currentIdx+1)}
     else if(e.key==="ArrowLeft"){e.preventDefault();scrollToIdx(currentIdx-1)}
@@ -564,6 +627,7 @@ document.addEventListener("keydown",e=>{
   if(k==="e"&&!e.repeat)openBook();
   else if(k==="t"&&!e.repeat){dock.classList.contains("show")?closeDock():openDock()}
   else if(k==="c"&&!e.repeat)openContacts();
+  else if(k==="v"&&!e.repeat)openCv();
 });
 
 /* ---------- Deep links: #portfolio or a section, e.g. #pigro ---------- */
@@ -571,6 +635,7 @@ function openFromHash(){
   const h=(location.hash||"").slice(1).toLowerCase();
   if(!h)return;
   if(h==="portfolio"||h==="projects"||h==="progetti"){if(book.hidden)openBook()}
+  else if(h==="cv"){if(cv.hidden)openCv()}
   else if(SECTIONS.some(s=>s.slug===h)){if(book.hidden)openBook(h);else goTo(h)}
 }
 openFromHash();
