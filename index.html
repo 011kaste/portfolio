@@ -77,49 +77,49 @@ button{font:inherit}
 /* ---- Nokia on the table ---- */
 /* .stageWrap matches the scene layers exactly (same inset, same parallax transform); .stage is a 16:9 box sized like background-size:cover, so anything placed in image percentages stays glued to the photo. */
 .stageWrap{position:absolute;inset:-1.5%;overflow:hidden;pointer-events:none;z-index:5;transition:transform .18s ease-out;will-change:transform}
-.stage{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:100%;aspect-ratio:16/9}
-.nokia{position:absolute;left:14.5%;top:59%;width:8.2%;padding:0;border:0;background:transparent;cursor:pointer;pointer-events:auto;transform-origin:50% 50%;transform:perspective(700px) rotateX(52deg) rotateZ(-16deg);filter:drop-shadow(6px 10px 9px rgba(0,0,0,.34)) drop-shadow(0 1px 2px rgba(0,0,0,.25));transition:transform .25s ease-out,filter .25s ease-out;-webkit-tap-highlight-color:transparent}
-.nokia:hover,.nokia:focus-visible{transform:perspective(700px) rotateX(50deg) rotateZ(-16deg) translateY(-3px);filter:drop-shadow(8px 14px 12px rgba(0,0,0,.36)) drop-shadow(0 1px 2px rgba(0,0,0,.25));outline:0}
+.stage{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%)}
+.nokia{position:absolute;left:17.5%;top:63%;width:4.9%;padding:0;border:0;background:transparent;cursor:pointer;pointer-events:auto;transform-origin:50% 50%;transform:perspective(900px) rotateX(48deg) rotateZ(-22deg);filter:drop-shadow(5px 9px 7px rgba(0,0,0,.38)) drop-shadow(0 1px 1px rgba(0,0,0,.3));transition:transform .25s ease-out,filter .25s ease-out;-webkit-tap-highlight-color:transparent}
+.nokia:hover,.nokia:focus-visible{transform:perspective(900px) rotateX(46deg) rotateZ(-22deg) translateY(-3px);filter:drop-shadow(7px 12px 10px rgba(0,0,0,.4)) drop-shadow(0 1px 1px rgba(0,0,0,.3));outline:0}
 .nokia svg,.nokia img{display:block;width:100%;height:auto}
-.nokia .lcdOff{fill:#7c8a66}
-.nokia .lcdOn{fill:#b6e08a;opacity:0;transition:opacity .15s}
-.nokia.lit .lcdOn{opacity:1}
-.nokia.lit .lcdText{opacity:1}
-.nokia .lcdText{opacity:0;transition:opacity .15s}
-@keyframes ring{0%,100%{transform:perspective(700px) rotateX(52deg) rotateZ(-16deg)}20%{transform:perspective(700px) rotateX(52deg) rotateZ(-13deg) translateX(2px)}40%{transform:perspective(700px) rotateX(52deg) rotateZ(-19deg) translateX(-2px)}60%{transform:perspective(700px) rotateX(52deg) rotateZ(-13deg) translateX(2px)}80%{transform:perspective(700px) rotateX(52deg) rotateZ(-19deg) translateX(-2px)}}
+@keyframes ring{0%,100%{transform:perspective(900px) rotateX(48deg) rotateZ(-22deg)}20%{transform:perspective(900px) rotateX(48deg) rotateZ(-19deg) translateX(2px)}40%{transform:perspective(900px) rotateX(48deg) rotateZ(-25deg) translateX(-2px)}60%{transform:perspective(900px) rotateX(48deg) rotateZ(-19deg) translateX(2px)}80%{transform:perspective(900px) rotateX(48deg) rotateZ(-25deg) translateX(-2px)}}
 .nokia.ring{animation:ring .42s linear}
 @media(prefers-reduced-motion:reduce){.nokia.ring{animation:none}}
 .contactHint{right:auto;left:8.5%;bottom:42%}
+/* The LCD glass: dull when the phone is off, backlit green when it is on. */
+.nk .lcd{fill:#7f8d68;transition:fill .15s}
+.nk.on .lcd{fill:#a9cf70}
+.nk .lcdTxt{opacity:0;transition:opacity .15s}
+.nk.on .lcdTxt{opacity:1}
 
-/* ---- Contacts screen ---- */
+/* ---- Contacts screen: the same phone, big, with a live LCD laid over its screen ---- */
 .phoneModal{position:fixed;inset:0;z-index:40;display:none;place-items:center;background:rgba(8,8,8,.86);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
 .phoneModal.show{display:grid}
-.phoneBody{position:relative;width:min(340px,86vw);background:linear-gradient(180deg,#2b2f3a,#181b23 60%,#111318);border-radius:44px 44px 62px 62px/40px 40px 90px 90px;padding:38px 26px 30px;box-shadow:0 30px 80px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.14),inset 0 -6px 12px rgba(0,0,0,.5);color:#dfe3ea;font-family:Inter,Arial,Helvetica,sans-serif}
-.phoneBody::before{content:"";position:absolute;left:50%;top:18px;transform:translateX(-50%);width:34px;height:4px;border-radius:2px;background:#0a0b0e;box-shadow:inset 0 1px 1px rgba(0,0,0,.8)}
-.phoneBrand{text-align:center;font-size:10px;letter-spacing:4px;text-transform:uppercase;color:#8a90a0;margin-bottom:12px}
-.lcd{position:relative;background:#98be6a;background:linear-gradient(180deg,#a6cc78,#8fb662);border:6px solid #0c0d10;border-radius:10px;padding:10px 10px 8px;font-family:'VT323',ui-monospace,Menlo,Consolas,monospace;color:#0f1d0a;text-transform:none;box-shadow:inset 0 0 0 1px rgba(0,0,0,.25),inset 0 6px 14px rgba(0,0,0,.18);text-shadow:0 0 .6px rgba(15,29,10,.6)}
-.lcd::after{content:"";position:absolute;inset:0;pointer-events:none;border-radius:4px;background-image:repeating-linear-gradient(0deg,rgba(0,0,0,.06) 0 1px,transparent 1px 3px);opacity:.7}
-.lcdHead{display:flex;justify-content:space-between;align-items:baseline;font-size:20px;line-height:1;border-bottom:2px solid rgba(15,29,10,.55);padding-bottom:5px;margin-bottom:6px}
-.lcdHead small{font-size:14px}
-.lcdList{list-style:none;margin:0;padding:0;display:grid;gap:2px}
-.lcdItem{display:grid;grid-template-columns:14px 1fr;gap:6px;align-items:baseline;padding:3px 4px;border:0;background:transparent;font:inherit;color:inherit;text-align:left;cursor:pointer;line-height:1.05;border-radius:2px;width:100%}
-.lcdItem .mark{font-size:18px;opacity:0}
-.lcdItem .lab{font-size:19px;letter-spacing:.5px;display:block}
-.lcdItem .val{font-size:14px;opacity:.85;display:block;word-break:break-all}
+.bigPhone{position:relative;width:min(340px,80vw,calc(100dvh * .64));filter:drop-shadow(0 34px 60px rgba(0,0,0,.65))}
+.bigPhone svg{display:block;width:100%;height:auto}
+.bigPhone .lcdTxt{display:none}
+/* Percentages below are the LCD rectangle of the SVG (x44 y66 w112 h98 in a 200x420 viewBox). */
+.lcdUI{position:absolute;left:22%;top:15.72%;width:56%;height:23.33%;padding:4% 4.5% 3%;font-family:'VT323',ui-monospace,Menlo,Consolas,monospace;color:#10200b;display:flex;flex-direction:column;container-type:size;background-image:repeating-linear-gradient(0deg,rgba(0,0,0,.05) 0 1px,transparent 1px 3px)}
+.lcdHead{display:flex;justify-content:space-between;align-items:baseline;font-size:13cqh;line-height:1;border-bottom:1.2cqh solid rgba(16,32,11,.6);padding-bottom:1.5cqh}
+.lcdList{list-style:none;margin:1.5cqh 0 0;padding:0;flex:1;display:grid;grid-auto-rows:1fr}
+.lcdItem{display:flex;gap:4cqw;align-items:center;padding:0 2cqw;border:0;background:transparent;font:inherit;color:inherit;text-align:left;cursor:pointer;line-height:1;font-size:12cqh;width:100%;border-radius:1px}
+.lcdItem::before{content:"";width:0;height:0;border:2.2cqh solid transparent;border-left-color:currentColor;opacity:0;flex:none}
+.lcdItem.sel{background:#10200b;color:#a9cf70}
+.lcdItem.sel::before{opacity:1}
 .lcdItem:focus{outline:0}
-.lcdItem.sel{background:#0f1d0a;color:#b6e08a;text-shadow:none}
-.lcdItem.sel .mark{opacity:1}
-.lcdFoot{display:flex;justify-content:space-between;font-size:16px;margin-top:8px;padding-top:5px;border-top:2px solid rgba(15,29,10,.55)}
+.lcdVal{font-size:9.5cqh;line-height:1.05;word-break:break-all;border-top:1px solid rgba(16,32,11,.4);padding-top:1.5cqh;margin-top:1cqh;min-height:2.1em}
+.lcdFoot{display:flex;justify-content:space-between;font-size:10cqh;margin-top:1cqh}
 .lcdFoot span{cursor:pointer}
-.lcdToast{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:#0f1d0a;color:#b6e08a;padding:6px 14px;font-size:18px;border-radius:2px;opacity:0;transition:opacity .15s;pointer-events:none;white-space:nowrap}
+.lcdToast{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:#10200b;color:#a9cf70;padding:1.5cqh 4cqw;font-size:13cqh;opacity:0;transition:opacity .15s;pointer-events:none;white-space:nowrap;max-width:96%;overflow:hidden;text-overflow:ellipsis}
 .lcdToast.show{opacity:1}
-.keys{display:grid;grid-template-columns:repeat(3,1fr);gap:8px 12px;margin-top:20px}
-.navRow{display:grid;grid-template-columns:1fr 1.6fr 1fr;gap:10px;margin-top:16px;align-items:center}
-.key,.softkey{border:0;font:inherit;color:#e6e9ef;background:linear-gradient(180deg,#3a3f4c,#232732);border-radius:14px;padding:9px 0;font-size:13px;letter-spacing:1px;box-shadow:0 2px 0 #0b0c10,inset 0 1px 0 rgba(255,255,255,.14);cursor:pointer;text-transform:uppercase}
-.key small{display:block;font-size:8px;letter-spacing:2px;color:#9aa0b0;margin-top:1px}
-.key:active,.softkey:active{transform:translateY(1px);box-shadow:0 1px 0 #0b0c10}
-.softkey.clear{color:#ffb6b0}
-.navKey{border-radius:999px;padding:10px 0;font-size:11px;letter-spacing:2px}
+/* Invisible hit areas over the drawn keys so the phone works with the mouse and on touch. */
+.hit{position:absolute;border:0;background:transparent;cursor:pointer;padding:0;border-radius:999px;-webkit-tap-highlight-color:transparent}
+.hit:active{background:rgba(255,255,255,.12)}
+.hitNavi{left:35%;top:43.8%;width:30%;height:4.3%}
+.hitC{left:70%;top:43.8%;width:18%;height:4.3%}
+.hitUp{left:12%;top:41.9%;width:15%;height:4.1%}
+.hitDown{left:12%;top:46%;width:15%;height:4.1%}
+.hit0{left:39%;top:79.5%;width:22%;height:6.8%}
+.hitHash{left:63%;top:78%;width:22%;height:6.8%}
 .phoneClose{position:absolute;top:18px;right:24px;border:1px solid rgba(255,255,255,.24);background:rgba(255,255,255,.06);color:white;border-radius:999px;padding:10px 14px;cursor:pointer;text-transform:uppercase;letter-spacing:1.8px;font-size:11px;font-family:inherit}
 
 @media(max-width:900px){
@@ -153,38 +153,52 @@ button{font:inherit}
   <div class="stageWrap" id="stageWrap">
     <div class="stage" id="stage">
       <button class="nokia" id="nokia" aria-label="Open contacts" title="Contatti (C)">
-        <!-- Placeholder drawing. Drop a transparent assets/nokia.png in the repo and it replaces this automatically. -->
-        <svg viewBox="0 0 120 246" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <!-- Nokia 3310. The same drawing is cloned into the contacts screen. Drop a transparent assets/nokia.png in the repo to replace this one on the table. -->
+        <svg class="nk" id="nk" viewBox="0 0 200 420" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
           <defs>
-            <linearGradient id="nkBody" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#3c4150"/><stop offset=".5" stop-color="#262a35"/><stop offset="1" stop-color="#15181f"/></linearGradient>
-            <linearGradient id="nkKey" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4a505e"/><stop offset="1" stop-color="#2a2e39"/></linearGradient>
+            <linearGradient id="nkBody" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#3b4463"/><stop offset=".45" stop-color="#232b45"/><stop offset="1" stop-color="#141a2d"/></linearGradient>
+            <linearGradient id="nkEdge" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="rgba(255,255,255,.28)"/><stop offset=".3" stop-color="rgba(255,255,255,.05)"/><stop offset="1" stop-color="rgba(0,0,0,.35)"/></linearGradient>
+            <linearGradient id="nkKey" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#eef0f3"/><stop offset="1" stop-color="#c3c8d2"/></linearGradient>
+            <linearGradient id="nkNavi" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4f7fe0"/><stop offset="1" stop-color="#2450b3"/></linearGradient>
+            <linearGradient id="nkGlass" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="rgba(255,255,255,.22)"/><stop offset=".5" stop-color="rgba(255,255,255,0)"/></linearGradient>
           </defs>
-          <path d="M22 4h76c9 0 15 6 16 16l4 78c1 20 0 40-3 60l-9 66c-2 12-9 18-20 18H34c-11 0-18-6-20-18L5 158c-3-20-4-40-3-60l4-78C7 10 13 4 22 4z" fill="url(#nkBody)"/>
-          <path d="M24 9h72c6 0 10 4 11 11l3 74c1 18 0 36-2 54l-8 62c-1 9-6 13-14 13H36c-8 0-13-4-14-13l-8-62c-2-18-3-36-2-54l3-74c1-7 5-11 11-11z" fill="none" stroke="rgba(255,255,255,.08)"/>
-          <rect x="8" y="2" width="12" height="10" rx="3" fill="#1b1e26"/>
-          <rect x="22" y="30" width="76" height="52" rx="5" fill="#0c0d10"/>
-          <rect class="lcdOff" x="26" y="34" width="68" height="44" rx="3"/>
-          <rect class="lcdOn" x="26" y="34" width="68" height="44" rx="3"/>
-          <g class="lcdText" font-family="VT323,monospace" font-size="11" fill="#0f1d0a">
-            <text x="30" y="47">Contacts</text><text x="30" y="60">&gt; Email</text><text x="30" y="72">  Instagram</text>
+          <!-- body -->
+          <path d="M100 3C152 3 179 18 183 54L197 150C201 192 197 240 190 282L177 380C173 405 150 417 100 417C50 417 27 405 23 380L10 282C3 240-1 192 3 150L17 54C21 18 48 3 100 3Z" fill="url(#nkBody)"/>
+          <path d="M100 3C152 3 179 18 183 54L197 150C201 192 197 240 190 282L177 380C173 405 150 417 100 417C50 417 27 405 23 380L10 282C3 240-1 192 3 150L17 54C21 18 48 3 100 3Z" fill="url(#nkEdge)"/>
+          <path d="M100 9C148 9 173 22 177 56L190 150C194 191 190 238 183 279L171 377C168 398 148 411 100 411C52 411 32 398 29 377L17 279C10 238 6 191 10 150L23 56C27 22 52 9 100 9Z" fill="none" stroke="rgba(255,255,255,.07)"/>
+          <!-- earpiece and logo -->
+          <rect x="82" y="22" width="36" height="4" rx="2" fill="#0b0e17"/>
+          <text x="100" y="47" text-anchor="middle" font-family="Inter,Arial,Helvetica,sans-serif" font-size="9" font-weight="700" letter-spacing="2.2" fill="#c9cfdc">NOKIA</text>
+          <!-- screen -->
+          <rect x="36" y="58" width="128" height="114" rx="14" fill="#0b0e17"/>
+          <rect x="38" y="60" width="124" height="110" rx="12" fill="none" stroke="rgba(255,255,255,.08)"/>
+          <rect class="lcd" x="44" y="66" width="112" height="98" rx="5"/>
+          <g class="lcdTxt" font-family="VT323,monospace" fill="#10200b"><text x="50" y="82" font-size="13">Contacts</text><path d="M50 87h100" stroke="#10200b" stroke-width="1.2"/><rect x="49" y="92" width="102" height="14" fill="#10200b"/><text x="53" y="103" font-size="12" fill="#a9cf70">&#9656; Email</text><text x="53" y="121" font-size="12">  Instagram</text><text x="53" y="139" font-size="12">  LinkedIn</text><text x="53" y="157" font-size="12">  Phone</text></g>
+          <rect x="44" y="66" width="112" height="49" rx="5" fill="url(#nkGlass)"/>
+          <!-- navi key, C key, rocker -->
+          <rect x="70" y="184" width="60" height="18" rx="9" fill="url(#nkNavi)"/>
+          <rect x="70" y="184" width="60" height="18" rx="9" fill="none" stroke="rgba(255,255,255,.25)"/>
+          <rect x="140" y="184" width="36" height="18" rx="9" fill="url(#nkKey)"/>
+          <text x="158" y="197" text-anchor="middle" font-family="Inter,Arial,Helvetica,sans-serif" font-size="10" font-weight="700" fill="#1a2140">C</text>
+          <rect x="24" y="176" width="30" height="34" rx="12" fill="url(#nkKey)"/>
+          <path d="M39 183l4 6h-8zM39 203l-4-6h8z" fill="#1a2140"/>
+          <!-- keypad, rows bent into the 3310 smile -->
+          <g fill="url(#nkKey)" stroke="rgba(0,0,0,.25)" stroke-width=".6">
+            <rect x="30" y="206" width="44" height="28" rx="12"/><rect x="78" y="212" width="44" height="28" rx="12"/><rect x="126" y="206" width="44" height="28" rx="12"/>
+            <rect x="32" y="246" width="44" height="28" rx="12"/><rect x="78" y="252" width="44" height="28" rx="12"/><rect x="124" y="246" width="44" height="28" rx="12"/>
+            <rect x="34" y="286" width="44" height="28" rx="12"/><rect x="78" y="292" width="44" height="28" rx="12"/><rect x="122" y="286" width="44" height="28" rx="12"/>
+            <rect x="37" y="326" width="44" height="28" rx="12"/><rect x="78" y="332" width="44" height="28" rx="12"/><rect x="119" y="326" width="44" height="28" rx="12"/>
           </g>
-          <text x="60" y="94" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="7" letter-spacing="2" fill="#8a90a0">NOKIA</text>
-          <rect x="43" y="100" width="34" height="14" rx="7" fill="url(#nkKey)"/>
-          <rect x="16" y="102" width="20" height="10" rx="4" fill="url(#nkKey)"/>
-          <rect x="84" y="102" width="20" height="10" rx="4" fill="#5a2b2b"/>
-          <text x="94" y="110" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="8" font-weight="700" fill="#ffb6b0">C</text>
-          <g fill="url(#nkKey)">
-            <rect x="18" y="122" width="24" height="15" rx="6"/><rect x="48" y="122" width="24" height="15" rx="6"/><rect x="78" y="122" width="24" height="15" rx="6"/>
-            <rect x="18" y="143" width="24" height="15" rx="6"/><rect x="48" y="143" width="24" height="15" rx="6"/><rect x="78" y="143" width="24" height="15" rx="6"/>
-            <rect x="19" y="164" width="24" height="15" rx="6"/><rect x="48" y="164" width="24" height="15" rx="6"/><rect x="77" y="164" width="24" height="15" rx="6"/>
-            <rect x="21" y="185" width="24" height="15" rx="6"/><rect x="48" y="185" width="24" height="15" rx="6"/><rect x="75" y="185" width="24" height="15" rx="6"/>
+          <g font-family="Inter,Arial,Helvetica,sans-serif" font-size="11" font-weight="700" fill="#1a2140" text-anchor="middle">
+            <text x="52" y="224">1</text><text x="100" y="230">2</text><text x="148" y="224">3</text>
+            <text x="54" y="264">4</text><text x="100" y="270">5</text><text x="146" y="264">6</text>
+            <text x="56" y="304">7</text><text x="100" y="310">8</text><text x="144" y="304">9</text>
+            <text x="59" y="344">*</text><text x="100" y="350">0</text><text x="141" y="344">#</text>
           </g>
-          <g font-family="Inter,Arial,sans-serif" font-size="8" fill="#e6e9ef" text-anchor="middle">
-            <text x="30" y="133">1</text><text x="60" y="133">2</text><text x="90" y="133">3</text>
-            <text x="30" y="154">4</text><text x="60" y="154">5</text><text x="90" y="154">6</text>
-            <text x="31" y="175">7</text><text x="60" y="175">8</text><text x="89" y="175">9</text>
-            <text x="33" y="196">*</text><text x="60" y="196">0</text><text x="87" y="196">#</text>
+          <g font-family="Inter,Arial,Helvetica,sans-serif" font-size="4.6" letter-spacing=".6" fill="#3a4360" text-anchor="middle">
+            <text x="100" y="236">ABC</text><text x="148" y="230">DEF</text><text x="54" y="270">GHI</text><text x="100" y="276">JKL</text><text x="146" y="270">MNO</text><text x="56" y="310">PQRS</text><text x="100" y="316">TUV</text><text x="144" y="310">WXYZ</text>
           </g>
+          <circle cx="100" cy="392" r="2.2" fill="#0b0e17"/>
         </svg>
       </button>
     </div>
@@ -207,20 +221,21 @@ button{font:inherit}
 
 <section class="phoneModal" id="phoneModal" role="dialog" aria-modal="true" aria-label="Contacts">
   <button class="phoneClose" id="phoneClose">Close</button>
-  <div class="phoneBody">
-    <div class="phoneBrand">Nokia</div>
-    <div class="lcd">
-      <div class="lcdHead"><span>Contacts</span><small id="lcdCount"></small></div>
+  <div class="bigPhone" id="bigPhone">
+    <!-- The phone SVG is cloned here by the script, then the live LCD and the key hit areas sit on top of it. -->
+    <div class="lcdUI">
+      <div class="lcdHead"><span>Contacts</span><span id="lcdCount"></span></div>
       <ul class="lcdList" id="lcdList"></ul>
+      <div class="lcdVal" id="lcdVal"></div>
       <div class="lcdFoot"><span id="lcdSelect">Select</span><span id="lcdCopy">Copy</span><span id="lcdBack">Back</span></div>
       <div class="lcdToast" id="lcdToast">Copied</div>
     </div>
-    <div class="navRow">
-      <button class="softkey" id="skSelect">Select</button>
-      <div style="display:grid;gap:6px"><button class="key navKey" id="skUp">▲</button><button class="key navKey" id="skDown">▼</button></div>
-      <button class="softkey clear" id="skBack">C</button>
-    </div>
-    <div class="keys" id="keypad"></div>
+    <button class="hit hitNavi" id="skSelect" aria-label="Select"></button>
+    <button class="hit hitC" id="skBack" aria-label="Back"></button>
+    <button class="hit hitUp" id="skUp" aria-label="Up"></button>
+    <button class="hit hitDown" id="skDown" aria-label="Down"></button>
+    <button class="hit hit0" id="sk0" aria-label="Copy"></button>
+    <button class="hit hitHash" id="skHash" aria-label="Close"></button>
   </div>
 </section>
 
@@ -273,35 +288,35 @@ const stageWrap=document.getElementById('stageWrap'),stage=document.getElementBy
 function sizeStage(){const W=stageWrap.clientWidth,H=stageWrap.clientHeight,s=Math.max(W/16,H/9);stage.style.width=(16*s)+'px';stage.style.height=(9*s)+'px'}
 new ResizeObserver(sizeStage).observe(stageWrap);sizeStage();
 // If a real photo of the phone is added as assets/nokia.png, use it instead of the drawing.
-const nokia=document.getElementById('nokia');
+const nokia=document.getElementById('nokia'),nk=document.getElementById('nk');
 (()=>{const im=new Image();im.onload=()=>{nokia.replaceChildren(im)};im.alt='';im.src='assets/nokia.png'})();
 
 // ---- Contacts (the Nokia) ----
-const phoneModal=document.getElementById('phoneModal'),lcdList=document.getElementById('lcdList'),lcdToast=document.getElementById('lcdToast'),lcdCount=document.getElementById('lcdCount');
+const phoneModal=document.getElementById('phoneModal'),bigPhone=document.getElementById('bigPhone'),lcdList=document.getElementById('lcdList'),lcdVal=document.getElementById('lcdVal'),lcdToast=document.getElementById('lcdToast'),lcdCount=document.getElementById('lcdCount');
+// Same phone in both places: clone the table drawing into the contacts screen.
+const bigSvg=document.getElementById('nk').cloneNode(true);bigSvg.removeAttribute('id');bigSvg.classList.add('on');bigSvg.querySelectorAll('[id]').forEach(el=>el.id='big-'+el.id);bigSvg.innerHTML=bigSvg.innerHTML.replace(/url\(#nk/g,'url(#big-nk');bigPhone.prepend(bigSvg);
 let sel=0,toastT=null,ringT=null;
-contacts.forEach((c,i)=>{const li=document.createElement('li');const b=document.createElement('button');b.className='lcdItem';b.innerHTML=`<span class="mark">&gt;</span><span><span class="lab">${c.label}</span><span class="val">${c.value}</span></span>`;b.onmouseenter=()=>select(i);b.onfocus=()=>select(i);b.onclick=()=>{select(i);activate()};li.appendChild(b);lcdList.appendChild(li)});
+contacts.forEach((c,i)=>{const li=document.createElement('li');const b=document.createElement('button');b.className='lcdItem';b.textContent=c.label;b.onmouseenter=()=>select(i);b.onfocus=()=>select(i);b.onclick=()=>{select(i);activate()};li.appendChild(b);lcdList.appendChild(li)});
 const items=[...lcdList.querySelectorAll('.lcdItem')];
-function select(i){sel=(i+contacts.length)%contacts.length;items.forEach((el,k)=>el.classList.toggle('sel',k===sel));lcdCount.textContent=`${sel+1}/${contacts.length}`;if(document.activeElement!==items[sel]&&phoneModal.classList.contains('show'))items[sel].focus({preventScroll:true})}
+function select(i){sel=(i+contacts.length)%contacts.length;items.forEach((el,k)=>el.classList.toggle('sel',k===sel));lcdVal.textContent=contacts[sel].value;lcdCount.textContent=`${sel+1}/${contacts.length}`;if(document.activeElement!==items[sel]&&phoneModal.classList.contains('show'))items[sel].focus({preventScroll:true})}
 function activate(){const c=contacts[sel];if(c.href.startsWith('http'))window.open(c.href,'_blank','noopener');else location.href=c.href}
 function toast(msg){lcdToast.textContent=msg;lcdToast.classList.add('show');clearTimeout(toastT);toastT=setTimeout(()=>lcdToast.classList.remove('show'),1100)}
 function copySel(){const t=contacts[sel].copy;if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(t).then(()=>toast('Copied'),()=>toast(t));else toast(t)}
-function openContacts(){if(phoneModal.classList.contains('show'))return;dock.classList.remove('show');nokia.classList.add('lit');const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;nokia.classList.remove('ring');void nokia.offsetWidth;if(!reduce)nokia.classList.add('ring');clearTimeout(ringT);ringT=setTimeout(()=>{phoneModal.classList.add('show');select(sel);items[sel].focus({preventScroll:true})},reduce?0:380)}
-function closeContacts(){clearTimeout(ringT);phoneModal.classList.remove('show');nokia.classList.remove('lit','ring')}
+function openContacts(){if(phoneModal.classList.contains('show'))return;dock.classList.remove('show');nk.classList.add('on');const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;nokia.classList.remove('ring');void nokia.offsetWidth;if(!reduce)nokia.classList.add('ring');clearTimeout(ringT);ringT=setTimeout(()=>{phoneModal.classList.add('show');select(sel);items[sel].focus({preventScroll:true})},reduce?0:380)}
+function closeContacts(){clearTimeout(ringT);phoneModal.classList.remove('show');nk.classList.remove('on');nokia.classList.remove('ring')}
 nokia.onclick=openContacts;
 document.getElementById('openContacts').onclick=openContacts;
 document.getElementById('phoneClose').onclick=closeContacts;
 document.getElementById('skBack').onclick=closeContacts;
+document.getElementById('skHash').onclick=closeContacts;
 document.getElementById('lcdBack').onclick=closeContacts;
 document.getElementById('skSelect').onclick=activate;
 document.getElementById('lcdSelect').onclick=activate;
 document.getElementById('lcdCopy').onclick=copySel;
+document.getElementById('sk0').onclick=copySel;
 document.getElementById('skUp').onclick=()=>select(sel-1);
 document.getElementById('skDown').onclick=()=>select(sel+1);
 phoneModal.addEventListener('click',e=>{if(e.target===phoneModal)closeContacts()});
-// Decorative keypad; the 0 key copies the selected contact, like a shortcut.
-const keypad=document.getElementById('keypad');
-['1','2 abc','3 def','4 ghi','5 jkl','6 mno','7 pqrs','8 tuv','9 wxyz','*','0 copy','#'].forEach(k=>{const [n,l]=k.split(' ');const b=document.createElement('button');b.className='key';b.innerHTML=`${n}<small>${l||'&nbsp;'}</small>`;if(n==='0')b.onclick=copySel;else if(n==='#')b.onclick=closeContacts;keypad.appendChild(b)});
-
 document.addEventListener('keydown',e=>{
   const k=e.key.toLowerCase(),open=phoneModal.classList.contains('show');
   if(open){
