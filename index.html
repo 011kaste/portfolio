@@ -72,8 +72,6 @@ button:focus-visible,a:focus-visible{outline:2px solid #fff;outline-offset:3px;b
 
 .ui{position:absolute;inset:0;z-index:20}
 .brand{position:absolute;top:28px;left:38px;color:rgba(255,255,255,.96);font-size:14px;letter-spacing:3.4px;text-transform:uppercase;text-shadow:0 1px 14px rgba(0,0,0,.3)}
-.topBtn{position:absolute;top:18px;right:28px;border:1px solid rgba(30,30,30,.45);background:rgba(242,244,240,.14);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border-radius:999px;color:var(--ink);padding:14px 24px;font-size:12px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:background .2s,color .2s}
-.topBtn:hover{background:var(--ink);color:#fff}
 .talkBtn{position:absolute;left:50%;top:57%;transform:translate(-50%,-50%);border:1px solid rgba(255,255,255,.78);background:rgba(15,15,15,.45);color:#fff;padding:13px 24px;border-radius:999px;font-size:12px;letter-spacing:2.2px;text-transform:uppercase;cursor:pointer;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);transition:background .2s}
 .talkBtn:hover{background:rgba(15,15,15,.72)}
 .openHint{position:absolute;right:14.4%;bottom:24.3%;display:flex;align-items:center;gap:10px;color:#191919;background:rgba(245,246,241,.30);padding:8px 12px;border-radius:10px;font-size:14px;letter-spacing:1.1px;text-transform:uppercase;cursor:pointer;border:0;transition:background .2s}
@@ -141,8 +139,7 @@ a.pill{text-decoration:none;display:inline-block}
 .zoomScroll img{display:block;height:100%;width:auto;max-width:none;user-select:none;-webkit-user-drag:none;margin:0 auto}
 
 @media (max-width:900px){
-  .brand{font-size:11px;left:18px;top:calc(20px + env(safe-area-inset-top,0px));max-width:calc(100% - 200px);line-height:1.5}
-  .topBtn{right:16px;top:calc(14px + env(safe-area-inset-top,0px));padding:12px 16px;font-size:10px}
+  .brand{font-size:11px;left:18px;top:calc(20px + env(safe-area-inset-top,0px));max-width:calc(100% - 36px);line-height:1.5}
   .talkBtn{top:auto;bottom:30vh}
   .openHint{right:16px;bottom:24vh;font-size:12px;background:rgba(245,246,241,.72)}
   .subtitle{width:auto;left:12px;right:12px;transform:none;bottom:calc(14px + env(safe-area-inset-bottom,0px));font-size:14px}
@@ -154,7 +151,7 @@ a.pill{text-decoration:none;display:inline-block}
   .zoomBar{padding-inline:16px}
   .hideNarrow{display:none}
 }
-@media (max-width:420px){.brand{letter-spacing:2.4px}.topBtn{letter-spacing:1.4px;padding:11px 13px}}
+@media (max-width:420px){.brand{letter-spacing:2.4px}}
 @media (prefers-reduced-motion:reduce){
   .sceneLayer,.questionDock,.subtitle,.book{transition:none;animation:none}
   .bookScroll{scroll-behavior:auto}
@@ -172,7 +169,6 @@ a.pill{text-decoration:none;display:inline-block}
   <div class="overlay"></div><div class="vignette"></div><div class="grain"></div>
   <section class="ui">
     <div class="brand">Alessandro Castellani</div>
-    <button class="topBtn" id="openProjects" type="button">Go to projects →</button>
     <button class="talkBtn" id="talkBtn" type="button" aria-controls="questionDock" aria-expanded="false">Talk to me</button>
     <button class="openHint" id="openPortfolio" type="button"><span class="keyCap" aria-hidden="true">E</span><span>Open the portfolio</span></button>
     <div class="questionDock" id="questionDock" role="region" aria-label="Interactive interview">
@@ -339,7 +335,6 @@ function openBook(slug){
   bookScroll.focus({preventScroll:true});
 }
 function closeBook(){book.hidden=true;if(lastTrigger&&lastTrigger.focus)lastTrigger.focus({preventScroll:true})}
-$("openProjects").onclick=()=>openBook();
 $("openPortfolio").onclick=()=>openBook();
 $("bookClose").onclick=closeBook;
 
